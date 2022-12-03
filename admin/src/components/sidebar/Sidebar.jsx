@@ -7,7 +7,6 @@ import StoreIcon from "@mui/icons-material/Store";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import { Link } from "react-router-dom";
-import { DarkModeContext } from "../../context/darkModeContext";
 import { useContext } from "react";
 
 const Sidebar = () => {

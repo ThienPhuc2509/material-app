@@ -80,43 +80,11 @@ export const hotelInputs = [
     id: "type",
     label: "Type",
     type: "text",
-    placeholder: "hotel",
   },
   {
-    id: "city",
-    label: "City",
-    type: "text",
-    placeholder: "New York",
-  },
-  {
-    id: "address",
-    label: "Address",
-    type: "text",
-    placeholder: "elton st, 216",
-  },
-  {
-    id: "distance",
-    label: "Distance from City Center",
-    type: "text",
-    placeholder: "500",
-  },
-  {
-    id: "title",
-    label: "Title",
-    type: "text",
-    placeholder: "The best Hotel",
-  },
-  {
-    id: "desc",
-    label: "Description",
-    type: "text",
-    placeholder: "description",
-  },
-  {
-    id: "cheapestPrice",
-    label: "Price",
-    type: "text",
-    placeholder: "100",
+    id: "state",
+    label: "State",
+    type: Boolean,
   },
 ];
 
@@ -138,11 +106,5 @@ export const roomInputs = [
     label: "Price",
     type: "number",
     placeholder: "100",
-  },
-  {
-    id: "maxPeople",
-    label: "Max People",
-    type: "number",
-    placeholder: "2",
   },
 ];

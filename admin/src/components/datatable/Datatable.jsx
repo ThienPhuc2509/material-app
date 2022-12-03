@@ -6,16 +6,16 @@ import { useEffect, useState } from "react";
 import useFetch from "../../hooks/useFetch";
 import axios from "axios";
 
-const Datatable = ({columns}) => {
+const Datatable = ({ columns }) => {
   const location = useLocation();
   const path = location.pathname.split("/")[1];
-  const [list, setList] = useState();
+  console.log(path);
+  const [list, setList] = useState("");
   const { data, loading, error } = useFetch(`/${path}`);
-
   useEffect(() => {
     setList(data);
   }, [data]);
-
+  console.log(list);
   const handleDelete = async (id) => {
     try {
       await axios.delete(`/${path}/${id}`);

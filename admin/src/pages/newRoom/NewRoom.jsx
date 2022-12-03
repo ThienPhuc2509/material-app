@@ -1,7 +1,6 @@
 import "./newRoom.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
-import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
 import { useState } from "react";
 import { roomInputs } from "../../formSource";
 import useFetch from "../../hooks/useFetch";
@@ -28,7 +27,7 @@ const NewRoom = () => {
     }
   };
 
-  console.log(info)
+  console.log(info);
   return (
     <div className="new">
       <Sidebar />
@@ -51,13 +50,7 @@ const NewRoom = () => {
                   />
                 </div>
               ))}
-              <div className="formInput">
-                <label>Rooms</label>
-                <textarea
-                  onChange={(e) => setRooms(e.target.value)}
-                  placeholder="give comma between room numbers."
-                />
-              </div>
+
               <div className="formInput">
                 <label>Choose a hotel</label>
                 <select
@@ -68,7 +61,9 @@ const NewRoom = () => {
                     ? "loading"
                     : data &&
                       data.map((hotel) => (
-                        <option key={hotel._id} value={hotel._id}>{hotel.name}</option>
+                        <option key={hotel._id} value={hotel._id}>
+                          {hotel.name}
+                        </option>
                       ))}
                 </select>
               </div>

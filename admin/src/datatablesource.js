@@ -1,13 +1,17 @@
 export const userColumns = [
   { field: "_id", headerName: "ID", width: 70 },
   {
-    field: "user",
+    field: "username",
     headerName: "User",
     width: 230,
     renderCell: (params) => {
       return (
         <div className="cellWithImg">
-          <img className="cellImg" src={params.row.img || "https://i.ibb.co/MBtjqXQ/no-avatar.gif"} alt="avatar" />
+          <img
+            className="cellImg"
+            src={params.row.img || "https://i.ibb.co/MBtjqXQ/no-avatar.gif"}
+            alt="avatar"
+          />
           {params.row.username}
         </div>
       );
@@ -25,13 +29,13 @@ export const userColumns = [
     width: 100,
   },
   {
-    field: "city",
-    headerName: "City",
+    field: "phone",
+    headerName: "Phone",
     width: 100,
   },
   {
-    field: "phone",
-    headerName: "Phone",
+    field: "isAdmin",
+    headerName: "Vai tro",
     width: 100,
   },
 ];
@@ -45,41 +49,21 @@ export const hotelColumns = [
   },
   {
     field: "type",
-    headerName: "Type",
+    headerName: "Loại",
     width: 100,
   },
   {
-    field: "title",
-    headerName: "Title",
+    field: "state",
+    headerName: "Tình trạng",
     width: 230,
-  },
-  {
-    field: "city",
-    headerName: "City",
-    width: 100,
   },
 ];
 
 export const roomColumns = [
   { field: "_id", headerName: "ID", width: 70 },
   {
-    field: "title",
-    headerName: "Title",
+    field: "name",
+    headerName: "Name",
     width: 230,
-  },
-  {
-    field: "desc",
-    headerName: "Description",
-    width: 200,
-  },
-  {
-    field: "price",
-    headerName: "Price",
-    width: 100,
-  },
-  {
-    field: "maxPeople",
-    headerName: "Max People",
-    width: 100,
   },
 ];

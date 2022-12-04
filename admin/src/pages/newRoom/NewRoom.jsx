@@ -1,7 +1,7 @@
 import "./newRoom.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
-import { useState } from "react";
+import React, { useState } from "react";
 import { roomInputs } from "../../formSource";
 import useFetch from "../../hooks/useFetch";
 import axios from "axios";
@@ -11,6 +11,7 @@ const NewRoom = () => {
   const [hotelId, setHotelId] = useState(undefined);
   const [rooms, setRooms] = useState([]);
 
+  console.log(rooms);
   const { data, loading, error } = useFetch("/hotels");
 
   const handleChange = (e) => {
@@ -19,22 +20,23 @@ const NewRoom = () => {
 
   const handleClick = async (e) => {
     e.preventDefault();
-    const roomNumbers = rooms.split(",").map((room) => ({ number: room }));
+    const roomNumbers = rooms.split(",");
+    console.log(roomNumbers);
+
     try {
       await axios.post(`/rooms/${hotelId}`, { ...info, roomNumbers });
     } catch (err) {
       console.log(err);
     }
   };
-
-  console.log(info);
+  // console.log(info);
   return (
     <div className="new">
       <Sidebar />
       <div className="newContainer">
         <Navbar />
         <div className="top">
-          <h1>Add New Room</h1>
+          <h1>Thêm vật liệu</h1>
         </div>
         <div className="bottom">
           <div className="right">
@@ -50,9 +52,15 @@ const NewRoom = () => {
                   />
                 </div>
               ))}
-
               <div className="formInput">
-                <label>Choose a hotel</label>
+                <label>Thông tin vật liệu</label>
+                <textarea
+                  onChange={(e) => setRooms(e.target.value)}
+                  placeholder="Nhập thông tin vật liệu"
+                />
+              </div>
+              <div className="formInput">
+                <label>Chọn kho</label>
                 <select
                   id="hotelId"
                   onChange={(e) => setHotelId(e.target.value)}

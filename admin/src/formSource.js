@@ -90,21 +90,9 @@ export const hotelInputs = [
 
 export const roomInputs = [
   {
-    id: "title",
-    label: "Title",
+    id: "name",
+    label: "Tên vật liệu",
     type: "text",
     placeholder: "2 bed room",
-  },
-  {
-    id: "desc",
-    label: "Description",
-    type: "text",
-    placeholder: "King size bed, 1 bathroom",
-  },
-  {
-    id: "price",
-    label: "Price",
-    type: "number",
-    placeholder: "100",
   },
 ];

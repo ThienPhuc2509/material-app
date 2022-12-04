@@ -39,13 +39,13 @@ const Sidebar = () => {
           <Link to="/hotels" style={{ textDecoration: "none" }}>
             <li>
               <StoreIcon className="icon" />
-              <span>Vật liệu</span>
+              <span>Kho</span>
             </li>
           </Link>
           <Link to="/rooms" style={{ textDecoration: "none" }}>
             <li>
               <CreditCardIcon className="icon" />
-              <span>Kho</span>
+              <span>Vật liệu</span>
             </li>
           </Link>
           <li>

@@ -7,7 +7,13 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { productInputs, userInputs } from "./formSource";
 import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
-import { hotelColumns, roomColumns, userColumns } from "./datatablesource";
+import {
+  hotelColumns,
+  roomColumns,
+  userColumns,
+  factoryColumns,
+  supplierColumns,  
+} from "./datatablesource";
 import NewHotel from "./pages/newHotel/NewHotel";
 import NewRoom from "./pages/newRoom/NewRoom";
 
@@ -99,6 +105,59 @@ function App() {
               />
               <Route
                 path=":productId"
+                element={
+                  <ProtectedRoute>
+                    <Single />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="new"
+                element={
+                  <ProtectedRoute>
+                    <NewRoom />
+                  </ProtectedRoute>
+                }
+              />
+            </Route>
+            <Route path="factories">
+              <Route
+                index
+                element={
+                  <ProtectedRoute>
+                    <List columns={factoryColumns} />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path=":factoryId"
+                element={
+                  <ProtectedRoute>
+                    <Single />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="new"
+                element={
+                  <ProtectedRoute>
+                    <NewRoom />
+                  </ProtectedRoute>
+                }
+              />
+            </Route>
+
+            <Route path="suppliers">
+              <Route
+                index
+                element={
+                  <ProtectedRoute>
+                    <List columns={supplierColumns} />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path=":supplierId"
                 element={
                   <ProtectedRoute>
                     <Single />

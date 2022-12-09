@@ -5,11 +5,12 @@ import { useState } from "react";
 import { hotelInputs } from "../../formSource";
 import useFetch from "../../hooks/useFetch";
 import axios from "axios";
-
+import { Link, useNavigate } from "react-router-dom";
 const NewHotel = () => {
   const [info, setInfo] = useState({});
   const [rooms, setRooms] = useState([]);
-
+  const navigate = useNavigate();
+  console.log(info);
   const { data, loading, error } = useFetch("/rooms");
 
   const handleChange = (e) => {
@@ -33,6 +34,7 @@ const NewHotel = () => {
       };
 
       await axios.post("/hotels", newhotel);
+      navigate("/hotels");
     } catch (err) {
       console.log(err);
     }
@@ -60,7 +62,7 @@ const NewHotel = () => {
                 </div>
               ))}
 
-              <div className="selectRooms">
+              {/* <div className="selectRooms">
                 <label>Rooms</label>
                 <select id="rooms" multiple onChange={handleSelect}>
                   {loading
@@ -68,11 +70,11 @@ const NewHotel = () => {
                     : data &&
                       data.map((room) => (
                         <option key={room._id} value={room._id}>
-                          {room.title}
+                          {room.name}
                         </option>
                       ))}
                 </select>
-              </div>
+              </div> */}
               <button onClick={handleClick}>Send</button>
             </form>
           </div>

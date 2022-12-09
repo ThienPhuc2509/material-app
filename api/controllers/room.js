@@ -12,6 +12,7 @@ export const createRoom = async (req, res, next) => {
     try {
       await Hotel.findByIdAndUpdate(hotelId, {
         $push: {
+          // id vật liệu
           rooms: savedRoom._id,
         },
       });

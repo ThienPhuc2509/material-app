@@ -44,13 +44,18 @@ export const hotelColumns = [
   { field: "_id", headerName: "ID", width: 250 },
   {
     field: "name",
-    headerName: "Name",
-    width: 150,
+    headerName: "Tên kho",
+    width: 120,
   },
   {
     field: "type",
     headerName: "Loại",
-    width: 100,
+    width: 140,
+  },
+  {
+    field: "rooms",
+    headerName: "Vật liệu",
+    width: 150,
   },
   {
     field: "state",

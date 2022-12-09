@@ -24,12 +24,11 @@ const Sidebar = () => {
       <hr />
       <div className="center">
         <ul>
-          <p className="title">MAIN</p>
           <li>
             <DashboardIcon className="icon" />
             <span>Trang chủ</span>
           </li>
-          <p className="title">LISTS</p>
+          <p className="title">Danh mục</p>
           <Link to="/users" style={{ textDecoration: "none" }}>
             <li>
               <PersonOutlineIcon className="icon" />
@@ -61,11 +60,26 @@ const Sidebar = () => {
             </li>
           </Link>
 
+          <Link to="/export" style={{ textDecoration: "none" }}>
+            <li>
+              <LocalShippingIcon className="icon" />
+              <span>Nhập kho</span>
+            </li>
+          </Link>
+
+          <Link to="/import" style={{ textDecoration: "none" }}>
+            <li>
+              <LocalShippingIcon className="icon" />
+              <span>Xuất kho</span>
+            </li>
+          </Link>
+
           <p className="title">USER</p>
           <li>
             <AccountCircleOutlinedIcon className="icon" />
             <span>Hồ sơ nhân viên</span>
           </li>
+
           <li>
             <ExitToAppIcon className="icon" />
             <span onClick={handleLogOut}>Đăng xuất</span>

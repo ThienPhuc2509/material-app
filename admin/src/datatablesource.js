@@ -60,19 +60,43 @@ export const hotelColumns = [
 ];
 
 export const roomColumns = [
-  { field: "_id", headerName: "ID", width: 70 },
+  { field: "_id", headerName: "ID", width: 230 },
   {
     field: "name",
-    headerName: "Name",
+    headerName: "Tên vật liệu",
     width: 230,
+  },
+  {
+    field: "roomNumbers",
+    headerName: "Loại vật liệu",
+    width: 230,
+    renderCell: (params) => (
+      <div>
+        {params.value.map((role, index) => (
+          <div key={index}>
+            <p>Tên: {role.title}</p>
+            <p>Giá tiền: {role.price}</p>
+            <p>Đơn vị: {role.unit}</p>
+            <p>Mô tả: {role.desc}</p>
+            <p>Số lượng: {role.quantity}</p>
+          </div>
+        ))}
+      </div>
+    ),
+    type: "string",
   },
 ];
 
 export const factoryColumns = [
-  { field: "_id", headerName: "ID", width: 70 },
+  { field: "_id", headerName: "ID", width: 170 },
   {
     field: "name",
-    headerName: "Name",
+    headerName: "Tên phân xưởng",
+    width: 230,
+  },
+  {
+    field: "phone",
+    headerName: "Số điện thoại",
     width: 230,
   },
 ];

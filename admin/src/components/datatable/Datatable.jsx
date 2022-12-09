@@ -38,7 +38,7 @@ const Datatable = ({ columns }) => {
               className="deleteButton"
               onClick={() => handleDelete(params.row._id)}
             >
-              Delete
+              Xóa
             </div>
           </div>
         );
@@ -55,6 +55,7 @@ const Datatable = ({ columns }) => {
       </div>
       <DataGrid
         className="datagrid"
+        rowHeight={160}
         rows={list}
         columns={columns.concat(actionColumn)}
         pageSize={9}

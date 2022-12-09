@@ -12,10 +12,12 @@ import {
   roomColumns,
   userColumns,
   factoryColumns,
-  supplierColumns,  
+  supplierColumns,
 } from "./datatablesource";
 import NewHotel from "./pages/newHotel/NewHotel";
 import NewRoom from "./pages/newRoom/NewRoom";
+import NewSupplier from "./pages/newSupplier/NewSupplier";
+import NewFactory from "./pages/newFactory/NewFactory";
 
 function App() {
   const ProtectedRoute = ({ children }) => {
@@ -141,7 +143,7 @@ function App() {
                 path="new"
                 element={
                   <ProtectedRoute>
-                    <NewRoom />
+                    <NewFactory />
                   </ProtectedRoute>
                 }
               />
@@ -168,7 +170,7 @@ function App() {
                 path="new"
                 element={
                   <ProtectedRoute>
-                    <NewRoom />
+                    <NewSupplier />
                   </ProtectedRoute>
                 }
               />

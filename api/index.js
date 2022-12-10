@@ -41,8 +41,8 @@ app.use("/api/hotels", hotelsRoute);
 app.use("/api/rooms", roomsRoute);
 app.use("/api/suppliers", supplierRoute);
 app.use("/api/factories", factoryRoute);
-app.use("/api/import", importRoute);
-app.use("/api/export", exportRoute);
+app.use("/api/imports", importRoute);
+app.use("/api/exports", exportRoute);
 
 app.use((err, req, res, next) => {
   const errorStatus = err.status || 500;

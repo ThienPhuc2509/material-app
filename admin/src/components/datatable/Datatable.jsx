@@ -31,7 +31,10 @@ const Datatable = ({ columns }) => {
       renderCell: (params) => {
         return (
           <div className="cellAction">
-            <Link to="/users/test" style={{ textDecoration: "none" }}>
+            <Link
+              to={`/${path}/${params.row._id}`}
+              style={{ textDecoration: "none" }}
+            >
               <div className="viewButton">View</div>
             </Link>
             <div
@@ -45,12 +48,31 @@ const Datatable = ({ columns }) => {
       },
     },
   ];
+  function pathswitch({ path }) {
+    switch (path) {
+      case "users":
+        return <div>Người dùng</div>;
+      case "hotels":
+        return <div>Kho</div>;
+      case "factories":
+        return <div>Phân xưởng</div>;
+      case "suppliers":
+        return <div>Nhà cung cấp</div>;
+      case "imports":
+        return <div>Nhập kho</div>;
+      case "exports":
+        return <div>Xuất kho</div>;
+      default:
+        return null;
+    }
+  }
+
   return (
     <div className="datatable">
       <div className="datatableTitle">
-        {path}
+        {pathswitch({ path })}
         <Link to={`/${path}/new`} className="link">
-          Add New
+          Thêm
         </Link>
       </div>
       <DataGrid

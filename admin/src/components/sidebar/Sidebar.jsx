@@ -60,14 +60,13 @@ const Sidebar = () => {
             </li>
           </Link>
 
-          <Link to="/export" style={{ textDecoration: "none" }}>
+          <Link to="/imports" style={{ textDecoration: "none" }}>
             <li>
               <LocalShippingIcon className="icon" />
               <span>Nhập kho</span>
             </li>
           </Link>
-
-          <Link to="/import" style={{ textDecoration: "none" }}>
+          <Link to="/exports" style={{ textDecoration: "none" }}>
             <li>
               <LocalShippingIcon className="icon" />
               <span>Xuất kho</span>

@@ -1,6 +1,8 @@
 import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
 import List from "./pages/list/List";
+import RoomList from "./pages/roomList/RoomList";
+
 import Single from "./pages/single/Single";
 import New from "./pages/new/New";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
@@ -13,11 +15,15 @@ import {
   userColumns,
   factoryColumns,
   supplierColumns,
+  importColumns,
+  exportColumns,
 } from "./datatablesource";
 import NewHotel from "./pages/newHotel/NewHotel";
 import NewRoom from "./pages/newRoom/NewRoom";
 import NewSupplier from "./pages/newSupplier/NewSupplier";
 import NewFactory from "./pages/newFactory/NewFactory";
+import NewImport from "./pages/newImport/NewImport";
+import NewExport from "./pages/newExport/NewExport";
 
 function App() {
   const ProtectedRoute = ({ children }) => {
@@ -65,7 +71,7 @@ function App() {
                 path="new"
                 element={
                   <ProtectedRoute>
-                    <New inputs={userInputs} title="Add New User" />
+                    <New inputs={userInputs} title="Thêm người dùng" />
                   </ProtectedRoute>
                 }
               />
@@ -101,7 +107,7 @@ function App() {
                 index
                 element={
                   <ProtectedRoute>
-                    <List columns={roomColumns} />
+                    <RoomList roomColumns={roomColumns} />
                   </ProtectedRoute>
                 }
               />
@@ -148,7 +154,6 @@ function App() {
                 }
               />
             </Route>
-
             <Route path="suppliers">
               <Route
                 index
@@ -171,6 +176,59 @@ function App() {
                 element={
                   <ProtectedRoute>
                     <NewSupplier />
+                  </ProtectedRoute>
+                }
+              />
+            </Route>
+
+            <Route path="imports">
+              <Route
+                index
+                element={
+                  <ProtectedRoute>
+                    <List columns={importColumns} />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path=":importId"
+                element={
+                  <ProtectedRoute>
+                    <Single />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="new"
+                element={
+                  <ProtectedRoute>
+                    <NewImport />
+                  </ProtectedRoute>
+                }
+              />
+            </Route>
+            <Route path="exports">
+              <Route
+                index
+                element={
+                  <ProtectedRoute>
+                    <List columns={exportColumns} />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path=":exportId"
+                element={
+                  <ProtectedRoute>
+                    <Single />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="new"
+                element={
+                  <ProtectedRoute>
+                    <NewExport />
                   </ProtectedRoute>
                 }
               />

@@ -129,3 +129,59 @@ export const supplierColumns = [
     width: 100,
   },
 ];
+export const importColumns = [
+  { field: "_id", headerName: "ID", width: 70 },
+  {
+    field: "name",
+    headerName: "Tên vật liệu",
+    width: 230,
+  },
+  {
+    field: "email",
+    headerName: "Đơn vị",
+    width: 100,
+  },
+  {
+    field: "address",
+    headerName: "Số lượng",
+    width: 100,
+  },
+  {
+    field: "total",
+    headerName: "Tổng tiền",
+    width: 100,
+  },
+  {
+    field: "phone",
+    headerName: "Nhà cung cấp",
+    width: 100,
+  },
+];
+export const exportColumns = [
+  { field: "_id", headerName: "ID", width: 70 },
+  {
+    field: "name",
+    headerName: "Tên vật liệu",
+    width: 230,
+  },
+  {
+    field: "email",
+    headerName: "Đơn vị",
+    width: 100,
+  },
+  {
+    field: "address",
+    headerName: "Số lượng",
+    width: 100,
+  },
+  {
+    field: "total",
+    headerName: "Tổng tiền",
+    width: 100,
+  },
+  {
+    field: "phone",
+    headerName: "Phân xưởng",
+    width: 100,
+  },
+];

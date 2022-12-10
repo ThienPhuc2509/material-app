@@ -1,0 +1,52 @@
+import Export from "../models/Export.js";
+
+export const createExport = async (req, res, next) => {
+  const newExport = new Export(req.body);
+
+  try {
+    const savedExport = await newExport.save();
+    res.status(200).json(savedExport);
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const updateExport = async (req, res, next) => {
+  try {
+    const updatedExport = await Export.findByIdAndUpdate(
+      req.params.id,
+      { $set: req.body },
+      { new: true }
+    );
+    res.status(200).json(updatedExport);
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const deleteExport = async (req, res, next) => {
+  try {
+    await Export.findByIdAndDelete(req.params.id);
+    res.status(200).json("Export has been deleted.");
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const getExport = async (req, res, next) => {
+  try {
+    const exports = await Export.findById(req.params.id);
+    res.status(200).json(exports);
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const getExports = async (req, res, next) => {
+  try {
+    const exports = await Export.find();
+    res.status(200).json(exports);
+  } catch (err) {
+    next(err);
+  }
+};

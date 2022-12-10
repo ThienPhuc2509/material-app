@@ -7,6 +7,9 @@ import hotelsRoute from "./routes/hotels.js";
 import roomsRoute from "./routes/rooms.js";
 import supplierRoute from "./routes/suppliers.js";
 import factoryRoute from "./routes/factories.js";
+import importRoute from "./routes/import.js";
+import exportRoute from "./routes/export.js";
+
 import cookieParser from "cookie-parser";
 import cors from "cors";
 
@@ -38,6 +41,8 @@ app.use("/api/hotels", hotelsRoute);
 app.use("/api/rooms", roomsRoute);
 app.use("/api/suppliers", supplierRoute);
 app.use("/api/factories", factoryRoute);
+app.use("/api/import", importRoute);
+app.use("/api/export", exportRoute);
 
 app.use((err, req, res, next) => {
   const errorStatus = err.status || 500;

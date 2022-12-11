@@ -16,7 +16,6 @@ const HotelSchema = new mongoose.Schema({
   rooms: {
     type: [String],
   },
- 
 });
 
-export default mongoose.model("Hotel", HotelSchema)
+export default mongoose.model("Hotel", HotelSchema);

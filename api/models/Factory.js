@@ -10,6 +10,9 @@ const FactorySchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    material: {
+      type: Array,
+    },
   },
   { timestamps: true }
 );

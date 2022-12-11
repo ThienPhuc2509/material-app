@@ -25,17 +25,17 @@ export const userColumns = [
 
   {
     field: "country",
-    headerName: "Country",
+    headerName: "Địa chỉ",
     width: 100,
   },
   {
     field: "phone",
-    headerName: "Phone",
+    headerName: "Số điện thoại",
     width: 100,
   },
   {
     field: "isAdmin",
-    headerName: "Vai tro",
+    headerName: "Phân quyền",
     width: 100,
   },
 ];
@@ -55,7 +55,16 @@ export const hotelColumns = [
   {
     field: "rooms",
     headerName: "Vật liệu",
-    width: 150,
+    width: 130,
+    renderCell: (params) => {
+      <ul>
+        {params.row.rooms.map((item, i) => (
+          <li key={i}>{item}</li>
+        ))}
+      </ul>;
+      console.log(params.value);
+    },
+    type: "string",
   },
   {
     field: "state",
@@ -96,7 +105,7 @@ export const factoryColumns = [
   { field: "_id", headerName: "ID", width: 170 },
   {
     field: "name",
-    headerName: "Tên phân xưởng",
+    headerName: "Phân xưởng",
     width: 230,
   },
   {
@@ -110,7 +119,7 @@ export const supplierColumns = [
   { field: "_id", headerName: "ID", width: 70 },
   {
     field: "name",
-    headerName: "Name",
+    headerName: "Nhà cung cấp",
     width: 230,
   },
   {
@@ -120,12 +129,12 @@ export const supplierColumns = [
   },
   {
     field: "address",
-    headerName: "Address",
+    headerName: "Địa chỉ",
     width: 100,
   },
   {
     field: "phone",
-    headerName: "Phone",
+    headerName: "Số điện thoại",
     width: 100,
   },
 ];
@@ -133,7 +142,7 @@ export const importColumns = [
   { field: "_id", headerName: "ID", width: 70 },
   {
     field: "name",
-    headerName: "Tên vật liệu",
+    headerName: "Vật liệu",
     width: 230,
   },
   {

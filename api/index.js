@@ -3,8 +3,8 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import authRoute from "./routes/auth.js";
 import usersRoute from "./routes/users.js";
-import hotelsRoute from "./routes/hotels.js";
-import roomsRoute from "./routes/rooms.js";
+import warehousesRoute from "./routes/warehouses.js";
+import materialsRoute from "./routes/materials.js";
 import supplierRoute from "./routes/suppliers.js";
 import factoryRoute from "./routes/factories.js";
 import importRoute from "./routes/import.js";
@@ -37,8 +37,8 @@ mongoose.connection.on("disconnected", () => {
 
 app.use("/api/auth", authRoute);
 app.use("/api/users", usersRoute);
-app.use("/api/hotels", hotelsRoute);
-app.use("/api/rooms", roomsRoute);
+app.use("/api/warehouses", warehousesRoute);
+app.use("/api/materials", materialsRoute);
 app.use("/api/suppliers", supplierRoute);
 app.use("/api/factories", factoryRoute);
 app.use("/api/imports", importRoute);

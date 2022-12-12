@@ -8,14 +8,16 @@ const SupplierSchema = new mongoose.Schema(
     email: {
       type: String,
       required: true,
-      unique: true,
     },
     address: {
       type: String,
       required: true,
     },
-
     phone: {
+      type: String,
+      required: true,
+    },
+    materialProvide: {
       type: String,
       required: true,
     },

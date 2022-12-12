@@ -5,19 +5,19 @@ import {
   deleteSupplier,
   getSupplier,
   get,
-} from "../controllers/supplier.js";
+} from "../controllers/supplierController.js";
 import { verifyAdmin } from "../utils/verifyToken.js";
 
 const router = express.Router();
 
 // CREATE
-router.post("/", verifyAdmin, createSupplier);
+router.post("/:materialid", verifyAdmin, createSupplier);
 
 // UPDATE
 router.put("/:id", verifyAdmin, updateSupplier);
 
 // DELETE
-router.delete("/:id", verifyAdmin, deleteSupplier);
+router.delete("/:id/:materialid", verifyAdmin, deleteSupplier);
 
 // GET
 router.get("/find/:id", getSupplier);

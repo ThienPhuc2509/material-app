@@ -5,7 +5,7 @@ import {
   deleteFactory,
   getFactory,
   get,
-} from "../controllers/factory.js";
+} from "../controllers/factoryController.js";
 import { verifyAdmin } from "../utils/verifyToken.js";
 
 const router = express.Router();

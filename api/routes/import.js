@@ -6,7 +6,7 @@ import {
   deleteImport,
   getImport,
   getImports,
-} from "../controllers/import.js";
+} from "../controllers/importController.js";
 const router = express.Router();
 
 //CREATE

@@ -1,15 +1,27 @@
 import Export from "../models/Export.js";
 import Material from "../models/Material.js";
+import User from "../models/User.js";
 import Factory from "../models/Factory.js";
+
 export const createExport = async (req, res, next) => {
   const newExport = new Export(req.body);
   const materialId = req.params.materialid;
   const factoryId = req.params.factoryid;
+  const userId = req.params.userid;
   try {
     const savedExport = await newExport.save();
-    // try{
-    //   await Material.findByIdAndUpdate(materialId,)
-    // }
+    try{
+      await Material.findByIdAndUpdate(materialId, 
+        await Factory.findByIdAndUpdate(factoryId,{
+          $push:{
+            materialFactory: savedExport.name
+          }
+        }))
+
+    }catch(err){
+      next(err);
+
+    }
     res.status(200).json(savedExport);
   } catch (err) {
     next(err);

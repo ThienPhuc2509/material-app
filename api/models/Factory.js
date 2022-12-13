@@ -10,7 +10,7 @@ const FactorySchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    material: {
+    materialFactory: {
       type: Array,
     },
   },

@@ -1,29 +1,28 @@
-import "./newHotel.scss";
+import "./newWarehouses.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import { useState } from "react";
 import { hotelInputs } from "../../formSource";
-import useFetch from "../../hooks/useFetch";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-const NewHotel = () => {
+const NewWareHouses = () => {
   const [info, setInfo] = useState({});
   const [rooms, setRooms] = useState([]);
   const navigate = useNavigate();
   console.log(info);
-  const { data, loading, error } = useFetch("/rooms");
+  // const { data, loading, error } = useFetch("/rooms");
 
   const handleChange = (e) => {
     setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
   };
 
-  const handleSelect = (e) => {
-    const value = Array.from(
-      e.target.selectedOptions,
-      (option) => option.value
-    );
-    setRooms(value);
-  };
+  // const handleSelect = (e) => {
+  //   const value = Array.from(
+  //     e.target.selectedOptions,
+  //     (option) => option.value
+  //   );
+  //   setRooms(value);
+  // };
 
   const handleClick = async (e) => {
     e.preventDefault();
@@ -33,8 +32,8 @@ const NewHotel = () => {
         rooms,
       };
 
-      await axios.post("/hotels", newhotel);
-      navigate("/hotels");
+      await axios.post("/warehouses", newhotel);
+      navigate("/warehouses");
     } catch (err) {
       console.log(err);
     }
@@ -84,4 +83,4 @@ const NewHotel = () => {
   );
 };
 
-export default NewHotel;
+export default NewWareHouses;

@@ -50,14 +50,14 @@ export default function DatatableRoom({ roomColumns }) {
   return (
     <div className="datatable">
       <div className="datatableTitle">
-        {path === "rooms" ? "Vật liệu" : ""}
+        {path === "warehouses" ? "Kho" : ""}
         <Link to={`/${path}/new`} className="link">
-          Thêm
+          Thêm kho
         </Link>
       </div>
       <DataGrid
         className="datagrid"
-        rowHeight={160}
+        rowHeight={200}
         rows={list}
         columns={roomColumns.concat(actionColumn)}
         pageSize={9}

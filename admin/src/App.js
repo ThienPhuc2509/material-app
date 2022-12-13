@@ -18,8 +18,8 @@ import {
   importColumns,
   exportColumns,
 } from "./datatablesource";
-import NewHotel from "./pages/newHotel/NewHotel";
-import NewRoom from "./pages/newRoom/NewRoom";
+import NewWarehouses from "./pages/newWarehouses/NewWarehouses";
+import NewMaterial from "./pages/newMaterial/NewMaterial";
 import NewSupplier from "./pages/newSupplier/NewSupplier";
 import NewFactory from "./pages/newFactory/NewFactory";
 import NewImport from "./pages/newImport/NewImport";
@@ -76,12 +76,12 @@ function App() {
                 }
               />
             </Route>
-            <Route path="hotels">
+            <Route path="warehouses">
               <Route
                 index
                 element={
                   <ProtectedRoute>
-                    <List columns={hotelColumns} />
+                    <RoomList roomColumns={hotelColumns} />
                   </ProtectedRoute>
                 }
               />
@@ -97,17 +97,17 @@ function App() {
                 path="new"
                 element={
                   <ProtectedRoute>
-                    <NewHotel />
+                    <NewWarehouses />
                   </ProtectedRoute>
                 }
               />
             </Route>
-            <Route path="rooms">
+            <Route path="materials">
               <Route
                 index
                 element={
                   <ProtectedRoute>
-                    <RoomList roomColumns={roomColumns} />
+                    <List columns={roomColumns} />
                   </ProtectedRoute>
                 }
               />
@@ -123,7 +123,7 @@ function App() {
                 path="new"
                 element={
                   <ProtectedRoute>
-                    <NewRoom />
+                    <NewMaterial />
                   </ProtectedRoute>
                 }
               />

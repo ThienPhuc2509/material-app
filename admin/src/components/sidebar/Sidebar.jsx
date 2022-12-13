@@ -35,13 +35,13 @@ const Sidebar = () => {
               <span>Nhân viên</span>
             </li>
           </Link>
-          <Link to="/hotels" style={{ textDecoration: "none" }}>
+          <Link to="/warehouses" style={{ textDecoration: "none" }}>
             <li>
               <StoreIcon className="icon" />
               <span>Kho</span>
             </li>
           </Link>
-          <Link to="/rooms" style={{ textDecoration: "none" }}>
+          <Link to="/materials" style={{ textDecoration: "none" }}>
             <li>
               <CreditCardIcon className="icon" />
               <span>Vật liệu</span>

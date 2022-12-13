@@ -53,24 +53,31 @@ export const hotelColumns = [
     width: 140,
   },
   {
-    field: "rooms",
+    field: "materials",
     headerName: "Vật liệu",
-    width: 130,
-    renderCell: (params) => {
+    width: 200,
+    renderCell: (params) => (
       <ul>
-        {params.row.rooms.map((item, i) => (
-          <li key={i}>{item}</li>
+        {params.value.map((role, index) => (
+          <div key={index}>
+            <li style={{ listStyle: "none" }}>
+              <b>Tên:</b> {role.name}
+            </li>
+            <li style={{ listStyle: "none" }}>
+              <b>Số lượng:</b> {role.quantity}
+            </li>
+          </div>
         ))}
-      </ul>;
-      console.log(params.value);
-    },
+      </ul>
+    ),
+
     type: "string",
   },
-  {
-    field: "state",
-    headerName: "Tình trạng",
-    width: 230,
-  },
+  // {
+  //   field: "state",
+  //   headerName: "Tình trạng",
+  //   width: 230,
+  // },
 ];
 
 export const roomColumns = [
@@ -78,26 +85,32 @@ export const roomColumns = [
   {
     field: "name",
     headerName: "Tên vật liệu",
-    width: 230,
+    width: 100,
   },
   {
-    field: "roomNumbers",
-    headerName: "Loại vật liệu",
-    width: 230,
-    renderCell: (params) => (
-      <div>
-        {params.value.map((role, index) => (
-          <div key={index}>
-            <p>Tên: {role.title}</p>
-            <p>Giá tiền: {role.price}</p>
-            <p>Đơn vị: {role.unit}</p>
-            <p>Mô tả: {role.desc}</p>
-            <p>Số lượng: {role.quantity}</p>
-          </div>
-        ))}
-      </div>
-    ),
-    type: "string",
+    field: "price",
+    headerName: "Giá tiền",
+    width: 100,
+  },
+  {
+    field: "unit",
+    headerName: "Đơn vị",
+    width: 100,
+  },
+  {
+    field: "desc",
+    headerName: "Mô tả",
+    width: 100,
+  },
+  {
+    field: "quantity",
+    headerName: "Số lượng",
+    width: 100,
+  },
+  {
+    field: "provider",
+    headerName: "Nhà cung cấp",
+    width: 100,
   },
 ];
 
@@ -113,6 +126,11 @@ export const factoryColumns = [
     headerName: "Số điện thoại",
     width: 230,
   },
+  {
+    field:"materialFactory",
+    headerName:"Vật liệu",
+    width:200,
+  }
 ];
 
 export const supplierColumns = [
@@ -193,4 +211,5 @@ export const exportColumns = [
     headerName: "Phân xưởng",
     width: 100,
   },
+ 
 ];

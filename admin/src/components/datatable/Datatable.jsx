@@ -52,10 +52,12 @@ const Datatable = ({ columns }) => {
     switch (path) {
       case "users":
         return <div>Người dùng</div>;
-      case "hotels":
+      case "warehouses":
         return <div>Kho</div>;
       case "factories":
         return <div>Phân xưởng</div>;
+      case "materials":
+         return <div>Phân xưởng</div>;
       case "suppliers":
         return <div>Nhà cung cấp</div>;
       case "imports":
@@ -77,7 +79,6 @@ const Datatable = ({ columns }) => {
       </div>
       <DataGrid
         className="datagrid"
-        rowHeight={160}
         rows={list}
         columns={columns.concat(actionColumn)}
         pageSize={9}

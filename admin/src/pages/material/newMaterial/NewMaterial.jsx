@@ -1,8 +1,8 @@
 import "./newMaterial.scss";
-import Sidebar from "../../components/sidebar/Sidebar";
-import Navbar from "../../components/navbar/Navbar";
+import Sidebar from "../../../components/sidebar/Sidebar";
+import Navbar from "../../../components/navbar/Navbar";
 import React, { useState, useRef } from "react";
-import useFetch from "../../hooks/useFetch";
+import useFetch from "../../../hooks/useFetch";
 import axios from "axios";
 import TextField from "@mui/material/TextField";
 import { Link, useNavigate } from "react-router-dom";

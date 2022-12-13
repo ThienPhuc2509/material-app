@@ -1,37 +1,33 @@
 import React, { useState, useRef } from "react";
-import "./newSupplier.scss";
+import "./newFactory.scss";
 import { Link, useNavigate } from "react-router-dom";
-import Sidebar from "../../components/sidebar/Sidebar";
-import Navbar from "../../components/navbar/Navbar";
-import useFetch from "../../hooks/useFetch";
+import Sidebar from "../../../components/sidebar/Sidebar";
+import Navbar from "../../../components/navbar/Navbar";
+import useFetch from "../../../hooks/useFetch";
 import axios from "axios";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 
-export default function NewSupplier() {
-  const { data, loading, error } = useFetch("/suppliers");
+export default function NewFactory() {
   const name = useRef();
-  const email = useRef();
-  const address = useRef();
   const phone = useRef();
   const navigate = useNavigate();
 
   const handleClick = async (e) => {
     e.preventDefault();
-    const suppliers = {
+    const factories = {
       name: name.current.value,
-      email: email.current.value,
-      address: address.current.value,
+
       phone: phone.current.value,
     };
 
-    console.log(suppliers);
+    console.log(factories);
 
     try {
-      await axios.post(`/suppliers/`, suppliers);
-      navigate("/suppliers");
+      await axios.post(`/factories/`, factories);
+      navigate("/factories");
     } catch (err) {
       console.log(err);
     }
@@ -71,19 +67,6 @@ export default function NewSupplier() {
                     id="outlined-phone"
                     label="Số điện thoại"
                     inputRef={phone}
-                  />
-                  <TextField
-                    required
-                    id="outlined-address"
-                    label="Địa chỉ"
-                    inputRef={address}
-                  />
-
-                  <TextField
-                    required
-                    id="outlined-email"
-                    label="Email"
-                    inputRef={email}
                   />
                 </div>
               </div>

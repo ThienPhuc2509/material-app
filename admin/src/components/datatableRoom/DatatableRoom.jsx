@@ -4,12 +4,12 @@ import { DataGrid } from "@mui/x-data-grid";
 import { Link, useLocation } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
 import axios from "axios";
-export default function DatatableRoom({ roomColumns }) {
+export default function DatatableRoom({ wareColumns }) {
   const location = useLocation();
   const path = location.pathname.split("/")[1];
   console.log(path);
   const [list, setList] = useState([]);
-  const [hotelId, setHotelId] = useState(undefined);
+  const [warehousesId, setWarehousesId] = useState(undefined);
 
   const { data, loading, error } = useFetch(`/${path}`);
   useEffect(() => {
@@ -18,7 +18,7 @@ export default function DatatableRoom({ roomColumns }) {
   console.log(list);
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`/${path}/${hotelId}/${id}`);
+      await axios.delete(`/${path}/${warehousesId}/${id}`);
       setList(list.filter((item) => item._id !== id));
     } catch (err) {}
   };
@@ -59,7 +59,7 @@ export default function DatatableRoom({ roomColumns }) {
         className="datagrid"
         rowHeight={200}
         rows={list}
-        columns={roomColumns.concat(actionColumn)}
+        columns={wareColumns.concat(actionColumn)}
         pageSize={9}
         rowsPerPageOptions={[9]}
         checkboxSelection

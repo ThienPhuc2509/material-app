@@ -57,7 +57,7 @@ const Datatable = ({ columns }) => {
       case "factories":
         return <div>Phân xưởng</div>;
       case "materials":
-         return <div>Phân xưởng</div>;
+        return <div>Phân xưởng</div>;
       case "suppliers":
         return <div>Nhà cung cấp</div>;
       case "imports":

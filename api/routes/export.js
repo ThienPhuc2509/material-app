@@ -10,7 +10,7 @@ import {
 const router = express.Router();
 
 //CREATE
-router.post("/:materialid/:factoryid", verifyAdmin, createExport);
+router.post("/", verifyAdmin, createExport);
 
 //UPDATE
 router.put("/:id", verifyAdmin, updateExport);

@@ -1,8 +1,8 @@
 import "./newWarehouses.scss";
-import Sidebar from "../../components/sidebar/Sidebar";
-import Navbar from "../../components/navbar/Navbar";
+import Sidebar from "../../../components/sidebar/Sidebar";
+import Navbar from "../../../components/navbar/Navbar";
 import { useState } from "react";
-import { hotelInputs } from "../../formSource";
+import { hotelInputs } from "../../../formSource";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 const NewWareHouses = () => {

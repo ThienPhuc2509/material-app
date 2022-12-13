@@ -57,7 +57,7 @@ const Login = () => {
           className="lInput"
         />
         <button disabled={loading} onClick={handleClick} className="lButton">
-          Login
+          Đăng nhập
         </button>
         {error && <span>{error.message}</span>}
       </div>

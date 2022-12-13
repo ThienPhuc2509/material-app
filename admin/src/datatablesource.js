@@ -40,7 +40,7 @@ export const userColumns = [
   },
 ];
 
-export const hotelColumns = [
+export const warehouseColumns = [
   { field: "_id", headerName: "ID", width: 250 },
   {
     field: "name",
@@ -80,7 +80,7 @@ export const hotelColumns = [
   // },
 ];
 
-export const roomColumns = [
+export const materialColumns = [
   { field: "_id", headerName: "ID", width: 230 },
   {
     field: "name",
@@ -127,10 +127,10 @@ export const factoryColumns = [
     width: 230,
   },
   {
-    field:"materialFactory",
-    headerName:"Vật liệu",
-    width:200,
-  }
+    field: "materialFactory",
+    headerName: "Vật liệu",
+    width: 200,
+  },
 ];
 
 export const supplierColumns = [
@@ -211,5 +211,4 @@ export const exportColumns = [
     headerName: "Phân xưởng",
     width: 100,
   },
- 
 ];

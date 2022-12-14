@@ -25,6 +25,7 @@ import DetailWarehouses from "./pages/warehouse/detailWarehouses/DetailWarehouse
 // Vật liệu
 import NewMaterial from "./pages/material/newMaterial/NewMaterial";
 import DetailMaterial from "./pages/material/detailMaterial/DetailMaterial";
+import EditMaterial from "./pages/material/editMaterial/EditMaterial";
 // Nhà cung cấp
 import NewSupplier from "./pages/supplier/newSupplier/NewSupplier";
 import DetailSupplier from "./pages/supplier/detailSupplier/DetailSupplier";
@@ -127,6 +128,14 @@ const Router = () => {
             element={
               <ProtectedRoute>
                 <DetailMaterial />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="edit"
+            element={
+              <ProtectedRoute>
+                <EditMaterial title="Chỉnh sửa thông tin vật liệu" />
               </ProtectedRoute>
             }
           />

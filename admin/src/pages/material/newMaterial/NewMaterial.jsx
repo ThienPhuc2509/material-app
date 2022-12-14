@@ -44,6 +44,7 @@ const NewMaterial = () => {
 
     try {
       await axios.post(`/materials/${warehousesId}`, detailMaterial);
+
       navigate("/materials");
     } catch (err) {
       console.log(err);
@@ -77,7 +78,7 @@ const NewMaterial = () => {
                   <TextField
                     required
                     id="outlined-username"
-                    label="Tên kho"
+                    label="Tên vật liệu"
                     inputRef={name}
                   />
 

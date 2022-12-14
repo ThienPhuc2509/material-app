@@ -5,8 +5,7 @@ const ExportSchema = new mongoose.Schema({
   materials: [
     {
       materialId: { type: String },
-      title: { type: String },
-      quantity: { type: Number },
+      quantity: { type: Number }, // số lượng xuất
     },
   ],
 });

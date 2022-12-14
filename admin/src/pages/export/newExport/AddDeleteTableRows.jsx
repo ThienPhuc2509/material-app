@@ -4,6 +4,8 @@ export default function AddDeleteTableRows(props) {
   const { material, quantity, materialId } = props;
 
   const [rowsData, setRowsData] = useState([]);
+  const checkId = materialId ? materialId : undefined;
+
   const addTableRows = () => {
     const rowsInput = {
       material: materialId,
@@ -49,10 +51,10 @@ export default function AddDeleteTableRows(props) {
                     <td>
                       <input
                         type="text"
-                        onChange={(evnt) => handleChange(index, evnt)}
-                        name="material"
+                        // onChange={(evnt) => handleChange(index, evnt)}
+                        name="materialId"
                         className="form-control"
-                        value={materialId}
+                        defaultValue={materialId || ""}
                       />
                     </td>
                     <td>

@@ -34,17 +34,13 @@ export default function NewExport() {
             <div className="formInput">
               <label>Chọn vật liệu</label>
               <h1>{materialId}</h1>
-              <select
-                option={material}
-                value={material}
-                onChange={(e) => setMaterialId(e.target.value)}
-              >
-                {/* {material &&
+              <select onChange={(e) => setMaterialId(e.target.value)}>
+                {material &&
                   material.map((i) => (
                     <option key={i._id} value={i._id}>
                       {i.name}
                     </option>
-                  ))} */}
+                  ))}
               </select>
 
               <AddDeleteTableRows materialId={materialId} />

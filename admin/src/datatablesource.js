@@ -73,11 +73,18 @@ export const warehouseColumns = [
 
     type: "string",
   },
-  // {
-  //   field: "state",
-  //   headerName: "Tình trạng",
-  //   width: 230,
-  // },
+  {
+    field: "state",
+    headerName: "Tình trạng",
+    width: 230,
+    renderCell: (params) => {
+      if (params.value === true) {
+        return <p style={{ color: "green" }}>Đang hoạt động</p>;
+      } else {
+        return <p style={{ color: "red" }}>Tạm ngưng</p>;
+      }
+    },
+  },
 ];
 
 export const materialColumns = [
@@ -187,9 +194,23 @@ export const importColumns = [
 export const exportColumns = [
   { field: "_id", headerName: "ID", width: 70 },
   {
-    field: "name",
-    headerName: "Tên vật liệu",
+    field: "materials",
+    headerName: "Vật liệu",
     width: 230,
+    renderCell: (params) => (
+      <ul>
+        {params.value.map((role, index) => (
+          <div key={index}>
+            <li style={{ listStyle: "none" }}>
+              <b>Tên:</b> {role.name}
+            </li>
+            <li style={{ listStyle: "none" }}>
+              <b>Số lượng:</b> {role.quantity}
+            </li>
+          </div>
+        ))}
+      </ul>
+    ),
   },
   {
     field: "email",

@@ -6,6 +6,13 @@ import useFetch from "../../../hooks/useFetch";
 import axios from "axios";
 import TextField from "@mui/material/TextField";
 import { Link, useNavigate } from "react-router-dom";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
 
 const NewMaterial = () => {
   const [warehousesId, setWarehousesId] = useState(undefined);
@@ -18,8 +25,11 @@ const NewMaterial = () => {
   const desc = useRef();
   // const from = useRef();
   const quantity = useRef();
-  
+
   const handleClick = async (e) => {
+    // if (warehousesId !== undefined) {
+    //   alert("Vui lòng chọn kho");
+    // }
     e.preventDefault();
     const detailMaterial = {
       name: name.current.value,
@@ -33,9 +43,8 @@ const NewMaterial = () => {
     console.log(detailMaterial);
 
     try {
-      await axios.post(`/materials/${warehousesId}`, 
-        detailMaterial,
-      );
+      await axios.post(`/materials/${warehousesId}`, detailMaterial);
+      navigate("/materials");
     } catch (err) {
       console.log(err);
     }
@@ -51,67 +60,79 @@ const NewMaterial = () => {
         </div>
         <div className="bottom">
           <div className="right">
-            <form>
-             
-              <div className="formInput">
-                <label>Thông tin vật liệu</label>
-                <TextField
-                  required
-                  id="outlined-username"
-                  label="Tên vật liệu"
-                  inputRef={name}
-                />
-                <TextField
-                  required
-                  id="outlined-phone"
-                  label="Giá tiền "
-                  inputRef={price}
-                />
-                <TextField
-                  required
-                  id="outlined-address"
-                  label="Đơn vị"
-                  inputRef={unit}
-                />
+            <Box
+              component="form"
+              sx={{
+                "& .MuiTextField-root": { m: 1, width: "50ch" },
+              }}
+              autoComplete="off"
+              onSubmit={handleClick}
+            >
+              <div>
+                <div>
+                  <Typography variant="p" component="h2">
+                    Thông tin vật liệu
+                  </Typography>
 
-                <TextField
-                  required
-                  id="outlined-email"
-                  label="Mô tả"
-                  inputRef={desc}
-                />
+                  <TextField
+                    required
+                    id="outlined-username"
+                    label="Tên kho"
+                    inputRef={name}
+                  />
 
-                {/* <TextField
-                  required
-                  id="outlined-efmail"
-                  label="Nhà cung cấp"
-                  inputRef={from}
-                /> */}
-                <TextField
-                  required
-                  id="outlined-eamail"
-                  label="Số lượng"
-                  inputRef={quantity}
-                />
+                  <TextField
+                    required
+                    id="outlined-type"
+                    label="Giá tiền"
+                    inputRef={price}
+                  />
+                  <TextField
+                    required
+                    id="outlined-type"
+                    label="Số lượng"
+                    inputRef={quantity}
+                  />
+                  <TextField
+                    required
+                    id="outlined-type"
+                    label="Đơn vị"
+                    inputRef={unit}
+                  />
+                  <TextField
+                    required
+                    id="outlined-type"
+                    label="Mô tả"
+                    inputRef={desc}
+                  />
+
+                  <FormControl sx={{ m: 1, width: "50ch", mt: 2 }}>
+                    <InputLabel id="demo-simple-select-label">
+                      Chọn kho
+                    </InputLabel>
+                    <Select
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
+                      value={warehousesId}
+                      label="Tình trạng"
+                      onChange={(e) => setWarehousesId(e.target.value)}
+                    >
+                      <MenuItem value="">-Chọn kho-</MenuItem>
+                      {data &&
+                        data.map((item) => (
+                          <MenuItem key={item._id} value={item._id}>
+                            {item.name}
+                          </MenuItem>
+                        ))}
+                    </Select>
+                  </FormControl>
+                </div>
               </div>
-              <div className="formInput">
-                <label>Chọn kho</label>
-                <select
-                  id="warehousesId"
-                  onChange={(e) => setWarehousesId(e.target.value)}
-                >
-                  {loading
-                    ? "loading"
-                    : data &&
-                      data.map((item) => (
-                        <option key={item._id} value={item._id}>
-                          {item.name}
-                        </option>
-                      ))}
-                </select>
-              </div>
-              <button onClick={handleClick}>Xác nhận</button>
-            </form>
+              <Button variant="contained" color="success" type="submit">
+                Đồng ý
+              </Button>
+              <Button variant="contained">Đặt lại</Button>
+            </Box>
           </div>
         </div>
       </div>

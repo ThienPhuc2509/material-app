@@ -1,38 +1,37 @@
+import React, { useState, useRef } from "react";
 import "./newWarehouses.scss";
 import Sidebar from "../../../components/sidebar/Sidebar";
 import Navbar from "../../../components/navbar/Navbar";
-import { useState } from "react";
-import { hotelInputs } from "../../../formSource";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
+
 const NewWareHouses = () => {
-  const [info, setInfo] = useState({});
-  const [rooms, setRooms] = useState([]);
   const navigate = useNavigate();
-  console.log(info);
-  // const { data, loading, error } = useFetch("/rooms");
-
-  const handleChange = (e) => {
-    setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+  const name = useRef();
+  const type = useRef();
+  const [state, setState] = useState(true);
+  const changeState = (event) => {
+    setState(event.target.value);
   };
-
-  // const handleSelect = (e) => {
-  //   const value = Array.from(
-  //     e.target.selectedOptions,
-  //     (option) => option.value
-  //   );
-  //   setRooms(value);
-  // };
 
   const handleClick = async (e) => {
     e.preventDefault();
     try {
-      const newhotel = {
-        ...info,
-        rooms,
+      const newWarehouse = {
+        name: name.current.value,
+        type: type.current.value,
+        state: state ? state : true,
       };
 
-      await axios.post("/warehouses", newhotel);
+      await axios.post("/warehouses", newWarehouse);
       navigate("/warehouses");
     } catch (err) {
       console.log(err);
@@ -44,38 +43,59 @@ const NewWareHouses = () => {
       <div className="newContainer">
         <Navbar />
         <div className="top">
-          <h1>Add New Product</h1>
+          <h1>Thêm kho</h1>
         </div>
         <div className="bottom">
           <div className="right">
-            <form>
-              {hotelInputs.map((input) => (
-                <div className="formInput" key={input.id}>
-                  <label>{input.label}</label>
-                  <input
-                    id={input.id}
-                    onChange={handleChange}
-                    type={input.type}
-                    placeholder={input.placeholder}
-                  />
-                </div>
-              ))}
+            <Box
+              component="form"
+              sx={{
+                "& .MuiTextField-root": { m: 1, width: "50ch" },
+              }}
+              autoComplete="off"
+              onSubmit={handleClick}
+            >
+              <div>
+                <div>
+                  <Typography variant="p" component="h2">
+                    Thông tin kho
+                  </Typography>
 
-              {/* <div className="selectRooms">
-                <label>Rooms</label>
-                <select id="rooms" multiple onChange={handleSelect}>
-                  {loading
-                    ? "loading"
-                    : data &&
-                      data.map((room) => (
-                        <option key={room._id} value={room._id}>
-                          {room.name}
-                        </option>
-                      ))}
-                </select>
-              </div> */}
-              <button onClick={handleClick}>Send</button>
-            </form>
+                  <TextField
+                    required
+                    id="outlined-username"
+                    label="Tên kho"
+                    inputRef={name}
+                  />
+
+                  <TextField
+                    required
+                    id="outlined-type"
+                    label="Mô tả"
+                    inputRef={type}
+                  />
+                  <FormControl sx={{ m: 1, width: "50ch" }}>
+                    <InputLabel id="demo-simple-select-label">
+                      Tình trạng
+                    </InputLabel>
+                    <Select
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
+                      value={state}
+                      label="Tình trạng"
+                      onChange={changeState}
+                    >
+                      <MenuItem value={true}>Đang hoạt động</MenuItem>
+                      <MenuItem value={false}>Tạm ngưng</MenuItem>
+                    </Select>
+                  </FormControl>
+                </div>
+              </div>
+              <Button variant="contained" color="success" type="submit">
+                Đồng ý
+              </Button>
+              <Button variant="contained">Đặt lại</Button>
+            </Box>
           </div>
         </div>
       </div>

@@ -19,27 +19,27 @@ const DetailMaterial = () => {
         <div className="top">
           <div className="left">
             <div className="editButton">Chỉnh sửa</div>
-            <h1 className="title">Thông tin người dùng</h1>
+            <h1 className="title">Thông tin vật liệu</h1>
             <div className="item">
-              <img
-                src="https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
-                alt=""
-                className="itemImg"
-              />
               <div className="details">
-                <h1 className="itemTitle">{data.username}</h1>
+                <h1 className="itemTitle">{data.name}</h1>
                 <div className="detailItem">
-                  <span className="itemKey">Email:</span>
-                  <span className="itemValue">{data.email}</span>
+                  <span className="itemKey">Giá tiền:</span>
+                  <span className="itemValue">{data.price}</span>
                 </div>
                 <div className="detailItem">
-                  <span className="itemKey">Phone:</span>
-                  <span className="itemValue">{data.phone}</span>
+                  <span className="itemKey">Đơn vị:</span>
+                  <span className="itemValue">{data.unit}</span>
                 </div>
 
                 <div className="detailItem">
-                  <span className="itemKey">Country:</span>
-                  <span className="itemValue">{data.country}</span>
+                  <span className="itemKey">Mô tả:</span>
+                  <span className="itemValue">{data.desc}</span>
+                </div>
+
+                <div className="detailItem">
+                  <span className="itemKey">Số lượng:</span>
+                  <span className="itemValue">{data.quantity}</span>
                 </div>
               </div>
             </div>

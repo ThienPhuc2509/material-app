@@ -34,7 +34,7 @@ export default function DatatableRoom({ wareColumns }) {
               to={`/${path}/${params.row._id}`}
               style={{ textDecoration: "none" }}
             >
-              <div className="viewButton">View</div>
+              <div className="viewButton">Chi tiết</div>
             </Link>
             <div
               className="deleteButton"

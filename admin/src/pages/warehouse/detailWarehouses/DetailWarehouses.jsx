@@ -4,7 +4,6 @@ import Sidebar from "../../../components/sidebar/Sidebar";
 import Navbar from "../../../components/navbar/Navbar";
 import useFetch from "../../../hooks/useFetch";
 import Grid from "@mui/material/Grid";
-
 import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
 
@@ -18,6 +17,7 @@ const DetailWarehouses = () => {
       try {
         const res = await axios.get(`/warehouses/find/${idP}`);
         setMaterial(res.data);
+        localStorage.setItem("editWarehouse", JSON.stringify(res.data));
       } catch (err) {}
     };
     getMaterial();
@@ -30,7 +30,12 @@ const DetailWarehouses = () => {
         <Navbar />
         <div className="top">
           <div className="left">
-            <div className="editButton">Chỉnh sửa</div>
+            <div className="editButton">
+              {" "}
+              <Link to="/warehouses/edit" className="link">
+                Chỉnh sửa
+              </Link>
+            </div>
             <h1 className="title">Thông tin kho</h1>
             <div className="item">
               <div className="details">

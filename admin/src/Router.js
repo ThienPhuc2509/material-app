@@ -22,6 +22,7 @@ import DetailUser from "./pages/user/detailUser/DetailUser";
 // Kho
 import NewWarehouses from "./pages/warehouse/newWarehouses/NewWarehouses";
 import DetailWarehouses from "./pages/warehouse/detailWarehouses/DetailWarehouses";
+import EditWarehouses from "./pages/warehouse/editWarehouses/EditWarehouses";
 // Vật liệu
 import NewMaterial from "./pages/material/newMaterial/NewMaterial";
 import DetailMaterial from "./pages/material/detailMaterial/DetailMaterial";
@@ -110,6 +111,14 @@ const Router = () => {
             element={
               <ProtectedRoute>
                 <NewWarehouses />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="edit"
+            element={
+              <ProtectedRoute>
+                <EditWarehouses title="Chỉnh sửa thông tin kho" />
               </ProtectedRoute>
             }
           />

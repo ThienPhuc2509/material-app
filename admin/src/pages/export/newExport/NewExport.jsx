@@ -1,7 +1,6 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import useFetch from "../../../hooks/useFetch";
 import axios from "axios";
-import TextField from "@mui/material/TextField";
 import Sidebar from "../../../components/sidebar/Sidebar";
 import Navbar from "../../../components/navbar/Navbar";
 import AddDeleteTableRows from "./AddDeleteTableRows";
@@ -21,6 +20,19 @@ export default function NewExport() {
     getMaterial();
   }, []);
   console.log(material);
+
+  const handleClick = async (e) => {
+    e.preventDefault();
+    const exportMaterial = {};
+    try {
+      await axios.post(
+        `/imports/${materialId}/${facetoriesId}`,
+        exportMaterial
+      );
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <div className="new">
       <Sidebar />

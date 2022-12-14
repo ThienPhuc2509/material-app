@@ -35,7 +35,7 @@ const Datatable = ({ columns }) => {
               to={`/${path}/${params.row._id}`}
               style={{ textDecoration: "none" }}
             >
-              <div className="viewButton">View</div>
+              <div className="viewButton">Chi tiết</div>
             </Link>
             <div
               className="deleteButton"
@@ -74,7 +74,10 @@ const Datatable = ({ columns }) => {
       <div className="datatableTitle">
         {pathswitch({ path })}
         <Link to={`/${path}/new`} className="link">
-          Thêm
+          <div style={{ display: "flex" }}>
+            <div style={{ marginRight: "4px" }}>Thêm</div>
+            {pathswitch({ path })}
+          </div>
         </Link>
       </div>
       <DataGrid

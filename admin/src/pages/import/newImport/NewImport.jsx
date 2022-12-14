@@ -17,15 +17,15 @@ export default function NewImport() {
       alert("Vui lòng chọn nhà cung cấp");
     }
     e.preventDefault();
-    const materialDetail = {
+    const importMaterial = {
       material: material.current.value,
       quantity: quantity.current.value,
     };
 
-    console.log(materialDetail);
+    console.log(importMaterial);
 
     try {
-      await axios.post(`/imports/${supplierId}`, materialDetail);
+      await axios.post(`/imports/${supplierId}`, importMaterial);
     } catch (err) {
       console.log(err);
     }

@@ -59,7 +59,7 @@ export default function NewFactory() {
                   <TextField
                     required
                     id="outlined-username"
-                    label="Tên nhà cung cấp"
+                    label="Tên phân xưởng"
                     inputRef={name}
                   />
                   <TextField

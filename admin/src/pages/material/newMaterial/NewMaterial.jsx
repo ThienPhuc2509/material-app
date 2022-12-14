@@ -27,9 +27,9 @@ const NewMaterial = () => {
   const quantity = useRef();
 
   const handleClick = async (e) => {
-    // if (warehousesId !== undefined) {
-    //   alert("Vui lòng chọn kho");
-    // }
+    if (warehousesId === undefined) {
+      alert("Vui lòng chọn kho");
+    }
     e.preventDefault();
     const detailMaterial = {
       name: name.current.value,
@@ -106,7 +106,7 @@ const NewMaterial = () => {
                     inputRef={desc}
                   />
 
-                  <FormControl sx={{ m: 1, width: "50ch", mt: 2 }}>
+                  <FormControl sx={{ m: 1, width: "50ch" }}>
                     <InputLabel id="demo-simple-select-label">
                       Chọn kho
                     </InputLabel>
@@ -117,7 +117,6 @@ const NewMaterial = () => {
                       label="Tình trạng"
                       onChange={(e) => setWarehousesId(e.target.value)}
                     >
-                      <MenuItem value="">-Chọn kho-</MenuItem>
                       {data &&
                         data.map((item) => (
                           <MenuItem key={item._id} value={item._id}>

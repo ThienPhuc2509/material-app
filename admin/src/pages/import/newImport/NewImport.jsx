@@ -1,11 +1,11 @@
 import React, { useState, useRef } from "react";
 import useFetch from "../../../hooks/useFetch";
 import axios from "axios";
-import TextField from "@mui/material/TextField";
 import Sidebar from "../../../components/sidebar/Sidebar";
 import Navbar from "../../../components/navbar/Navbar";
 import "./newImport.scss";
 import AddDeleteTableRows from "./AddDeleteTableRows";
+import { Link } from "react-router-dom";
 export default function NewImport() {
   const [supplierId, setSupplierId] = useState(undefined);
   const { data, loading, error } = useFetch("/suppliers");
@@ -36,9 +36,16 @@ export default function NewImport() {
       <Sidebar />
       <div className="newContainer">
         <Navbar />
-        <div className="top">
+        <div
+          className="top"
+          style={{ display: "flex", justifyContent: "space-between" }}
+        >
           <h1>Nhập hàng vào kho</h1>
+          <Link to={`/materials/new`} className="link">
+            <div>Thêm vật liệu</div>
+          </Link>
         </div>
+
         <div className="bottom">
           <AddDeleteTableRows material={material} quantity={quantity} />
 

@@ -3,6 +3,8 @@ import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
 import List from "./pages/list/List";
 import ListWareHouse from "./pages/listWarehouse/ListWareHouse";
+import ListMaterial from "./pages/listMaterial/ListMaterial";
+
 import { Routes, Route, Navigate } from "react-router-dom";
 import { productInputs, userInputs } from "./formSource";
 import { useContext } from "react";
@@ -130,7 +132,7 @@ const Router = () => {
             index
             element={
               <ProtectedRoute>
-                <List columns={materialColumns} />
+                <ListMaterial materialColumns={materialColumns} />
               </ProtectedRoute>
             }
           />
@@ -147,6 +149,14 @@ const Router = () => {
             element={
               <ProtectedRoute>
                 <EditMaterial title="Chỉnh sửa thông tin vật liệu" />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="import/new"
+            element={
+              <ProtectedRoute>
+                <NewImport />
               </ProtectedRoute>
             }
           />

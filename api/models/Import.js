@@ -5,10 +5,7 @@ const ImportSchema = new mongoose.Schema({
   materials: [
     {
       materialId: { type: String },
-      title: { type: String },
       quantity: { type: Number },
-      total: { type: Number },
-      state: { type: Boolean },
     },
   ],
 });

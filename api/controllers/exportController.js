@@ -8,11 +8,23 @@ export const createExport = async (req, res, next) => {
   //console.log(newExport);
   try {
     const savedExport = await newExport.save();
+
+    savedExport.materials.forEach(async (i) => {
+      const updatedMaterial = await Material.findById(i.materialId);
+      updatedMaterial.quantity =
+        updatedMaterial.quantity >= i.quantity
+          ? updatedMaterial.quantity - i.quantity
+          : 0;
+      await updatedMaterial.save();
+      //console.log(updatedMaterial);
+    });
     res.status(200).json(savedExport);
   } catch (err) {
     next(err);
   }
 };
+
+// trường hợp lúc đầu a => -3 => -5 => 3-5 =-2 | -5 => -3 => 5 -
 
 export const updateExport = async (req, res, next) => {
   try {
@@ -21,6 +33,15 @@ export const updateExport = async (req, res, next) => {
       { $set: req.body },
       { new: true }
     );
+    updatedExport.materials.forEach(async (i) => {
+      const updatedMaterial = await Material.findById(i.materialId);
+      updatedMaterial.quantity =
+        updatedMaterial.quantity >= i.quantity
+          ? updatedMaterial.quantity - i.quantity
+          : 0;
+      await updatedMaterial.save();
+      //console.log(updatedMaterial);
+    });
     res.status(200).json(updatedExport);
   } catch (err) {
     next(err);

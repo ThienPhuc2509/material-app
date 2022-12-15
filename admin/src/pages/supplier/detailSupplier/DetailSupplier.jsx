@@ -10,7 +10,7 @@ const DetailSupplier = () => {
   const path = location.pathname.split("/")[1];
   const idP = location.pathname.split("/")[2];
   const { data, loading, error } = useFetch(`/${path}/find/${idP}`);
-  console.log(data);
+  localStorage.setItem("editSupplier", JSON.stringify(data));
   return (
     <div className="single">
       <Sidebar />
@@ -18,7 +18,12 @@ const DetailSupplier = () => {
         <Navbar />
         <div className="top">
           <div className="left">
-            <div className="editButton">Chỉnh sửa</div>
+            <div className="editButton">
+              {" "}
+              <Link to="/suppliers/edit" className="link">
+                Chỉnh sửa
+              </Link>
+            </div>
             <h1 className="title">Thông tin người dùng</h1>
             <div className="item">
               <img

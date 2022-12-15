@@ -10,7 +10,8 @@ const DetailFactory = () => {
   const path = location.pathname.split("/")[1];
   const idP = location.pathname.split("/")[2];
   const { data, loading, error } = useFetch(`/${path}/find/${idP}`);
-  console.log(data);
+  localStorage.setItem("editFactory", JSON.stringify(data));
+
   return (
     <div className="single">
       <Sidebar />
@@ -18,7 +19,11 @@ const DetailFactory = () => {
         <Navbar />
         <div className="top">
           <div className="left">
-            <div className="editButton">Chỉnh sửa</div>
+            <div className="editButton">
+              <Link to="/factories/edit" className="link">
+                Chỉnh sửa
+              </Link>
+            </div>
             <h1 className="title">Thông tin phân xưởng</h1>
             <div className="item">
               <div className="details">

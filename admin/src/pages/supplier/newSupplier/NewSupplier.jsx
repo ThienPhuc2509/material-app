@@ -57,7 +57,7 @@ export default function NewSupplier() {
               <div>
                 <div>
                   <Typography variant="p" component="h2">
-                    Thông tin cá nhân
+                    Thông tin nhà cung cấp
                   </Typography>
 
                   <TextField

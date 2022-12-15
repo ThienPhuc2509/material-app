@@ -4,31 +4,28 @@ import axios from "axios";
 import Sidebar from "../../../components/sidebar/Sidebar";
 import Navbar from "../../../components/navbar/Navbar";
 import AddDeleteTableRows from "./AddDeleteTableRows";
+import { AuthContext } from "../../../context/AuthContext";
 export default function NewExport() {
+  const { user } = useContext(AuthContext);
+  console.log(user._id);
   const [facetoriesId, setFacetoriesId] = useState(undefined);
   const [materialId, setMaterialId] = useState(undefined);
   const [material, setMaterial] = useState([]);
   const { data, loading, error } = useFetch("/factories");
   // const {selected, setSelected} = useState()
-  useEffect(() => {
-    const getMaterial = async () => {
-      try {
-        const res = await axios.get("/materials");
-        setMaterial(res.data);
-      } catch (err) {}
-    };
-    getMaterial();
-  }, []);
-  console.log(material);
 
   const handleClick = async (e) => {
     e.preventDefault();
-    const exportMaterial = {};
+    const exportMaterial = {
+      userId: user ? user._id : "",
+      factoryId: facetoriesId ? facetoriesId : undefined,
+      materials: localStorage.getItem("material")
+        ? JSON.parse(localStorage.getItem("material"))
+        : undefined,
+    };
+    console.log(exportMaterial);
     try {
-      await axios.post(
-        `/imports/${materialId}/${facetoriesId}`,
-        exportMaterial
-      );
+      await axios.post(`/exports/`, exportMaterial);
     } catch (err) {
       console.log(err);
     }
@@ -45,16 +42,6 @@ export default function NewExport() {
           <div className="right">
             <div className="formInput">
               <label>Chọn vật liệu</label>
-              <h1>{materialId}</h1>
-              <select onChange={(e) => setMaterialId(e.target.value)}>
-                {material &&
-                  material.map((i) => (
-                    <option key={i._id} value={i._id}>
-                      {i.name}
-                    </option>
-                  ))}
-              </select>
-
               <AddDeleteTableRows materialId={materialId} />
             </div>
 
@@ -74,7 +61,9 @@ export default function NewExport() {
                     ))}
               </select>
             </div>
-            {/* <button onClick={handleClick}>Send</button> */}
+            <button type="submit" onClick={handleClick}>
+              Send
+            </button>
           </div>
         </div>
       </div>

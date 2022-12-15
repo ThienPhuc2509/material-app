@@ -30,9 +30,11 @@ import EditMaterial from "./pages/material/editMaterial/EditMaterial";
 // Nhà cung cấp
 import NewSupplier from "./pages/supplier/newSupplier/NewSupplier";
 import DetailSupplier from "./pages/supplier/detailSupplier/DetailSupplier";
+import EditSupplier from "./pages/supplier/editSupplier/EditSupplier";
 // Phân xưởng
 import NewFactory from "./pages/factory/newFactory/NewFactory";
 import DetailFactory from "./pages/factory/detailFactory/DetailFactory";
+import EditFactory from "./pages/factory/editFactory/EditFactory";
 // Nhập kho
 import NewImport from "./pages/import/newImport/NewImport";
 import DetailImport from "./pages/import/detailImport/DetailImport";
@@ -179,6 +181,15 @@ const Router = () => {
             element={
               <ProtectedRoute>
                 <NewFactory />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="edit"
+            element={
+              <ProtectedRoute>
+                <EditFactory title="Chỉnh sửa thông tin phân xưởng" />
               </ProtectedRoute>
             }
           />

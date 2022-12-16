@@ -56,20 +56,20 @@ export const warehouseColumns = [
     field: "materials",
     headerName: "Vật liệu",
     width: 200,
-    renderCell: (params) => (
-      <ul>
-        {params.value.map((role, index) => (
-          <div key={index}>
-            <li style={{ listStyle: "none" }}>
-              <b>Tên:</b> {role.name}
-            </li>
-            <li style={{ listStyle: "none" }}>
-              <b>Số lượng:</b> {role.quantity}
-            </li>
-          </div>
-        ))}
-      </ul>
-    ),
+    renderCell: (params) =>
+      console.log(params),
+      // <ul>
+      //   {params.value.map((role, index) => (
+      //     <div key={index}>
+      //       <li style={{ listStyle: "none" }}>
+      //         <b>Tên:</b> {role.name}
+      //       </li>
+      //       <li style={{ listStyle: "none" }}>
+      //         <b>Số lượng:</b> {role.quantity}
+      //       </li>
+      //     </div>
+      //   ))}
+      // </ul>
 
     type: "string",
   },

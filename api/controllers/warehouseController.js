@@ -44,8 +44,9 @@ export const getWarehouses = async (req, res, next) => {
   // const { min, max, ...others } = req.query;
   try {
     const warehouses = await Warehouse.find();
-    warehouses.forEach((element) => {
-      element.materials.map(async (e) => {
+    warehouses.map((element) => {
+      let a = [];
+      return element.materials.map(async (e) => {
         const x = await Material.findById(e.materialId);
         return {
           materialId: e.materialId,
@@ -53,9 +54,8 @@ export const getWarehouses = async (req, res, next) => {
           quantity: x.quantity,
         };
       });
-      console.log(element);
     });
-
+    console.log(warehouses);
     res.status(200).json(warehouses);
   } catch (err) {
     next(err);

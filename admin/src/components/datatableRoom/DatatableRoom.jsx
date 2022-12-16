@@ -12,6 +12,11 @@ export default function DatatableRoom({ wareColumns }) {
 
   const { data, loading, error } = useFetch(`/${path}`);
   useEffect(() => {
+    try {
+      
+    } catch (err) {
+      console.log(err)
+    }
     setList(data);
   }, [data]);
   const handleDelete = async (id) => {

@@ -99,7 +99,7 @@ export const getMaterialSupplier = async (req, res, next) => {
   try {
     const material = await Material.findById(req.params.id);
     const list = await Promise.all(
-      material.provider.map((item) => {
+      material.supplierId.map((item) => {
         return Supplier.findById(item);
       })
     );

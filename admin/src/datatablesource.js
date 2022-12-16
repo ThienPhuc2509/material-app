@@ -115,7 +115,7 @@ export const materialColumns = [
     width: 100,
   },
   {
-    field: "provider",
+    field: "supplierId",
     headerName: "Nhà cung cấp",
     width: 100,
   },

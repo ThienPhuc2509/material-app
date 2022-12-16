@@ -23,7 +23,7 @@ export default function NewExport() {
         ? JSON.parse(localStorage.getItem("material"))
         : undefined,
     };
-    console.log(exportMaterial);
+
     try {
       await axios.post(`/exports/`, exportMaterial);
     } catch (err) {

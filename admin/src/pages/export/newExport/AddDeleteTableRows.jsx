@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import useFetch from "../../../hooks/useFetch";
 import axios from "axios";
 export default function AddDeleteTableRows() {
-  const { data, loading, error } = useFetch("/factories");
+  //const { data, loading, error } = useFetch("/factories");
   const [material, setMaterial] = useState([]);
   const [materialId, setMaterialId] = useState({});
   const [quantity, setQuantity] = useState({});
@@ -33,14 +33,23 @@ export default function AddDeleteTableRows() {
     localStorage.setItem("material", JSON.stringify(rows));
   };
 
-  const HandleMaterial = (e) => {
-    setMaterialId(e.target.value);
+  const HandleMaterial = (index, event) => {
+    const { name, value } = event.target;
+    console.log(index, name, value);
+    setMaterialId(value);
     material.forEach((i) => {
-      if (i._id === e.target.value) setQuantity(i.quantity);
+      if (i._id === value) setQuantity(i.quantity);
     });
+
+    let rowsInput = [...rowsData];
+    rowsInput[index][name] = value;
+    setRowsData(rowsInput);
+    //console.log(rowsInput);
+    localStorage.setItem("material", JSON.stringify(rowsData));
   };
   const handleChange = (index, evnt) => {
     const { name, value } = evnt.target;
+    console.log(index, name, value);
     let rowsInput = [...rowsData];
     rowsInput[index][name] = value;
     setRowsData(rowsInput);
@@ -70,7 +79,10 @@ export default function AddDeleteTableRows() {
                 return (
                   <tr key={index}>
                     <td>
-                      <select onChange={HandleMaterial}>
+                      <select
+                        name="materialId"
+                        onChange={(evnt) => HandleMaterial(index, evnt)}
+                      >
                         {material &&
                           material.map((i) => (
                             <option key={i._id} value={i._id}>

@@ -11,7 +11,7 @@ export const createSupplier = async (req, res, next) => {
     try {
       await Material.findByIdAndUpdate(materialId, {
         $push: {
-          provider: savedSupplier.name,
+          supplierId: savedSupplier.name,
         },
       });
     } catch (err) {

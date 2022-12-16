@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useContext } from "react";
 import useFetch from "../../../hooks/useFetch";
 import axios from "axios";
 import Sidebar from "../../../components/sidebar/Sidebar";
@@ -6,26 +6,24 @@ import Navbar from "../../../components/navbar/Navbar";
 import "./newImport.scss";
 import AddDeleteTableRows from "./AddDeleteTableRows";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../context/AuthContext";
+
 export default function NewImport() {
+  const { user } = useContext(AuthContext);
   const [supplierId, setSupplierId] = useState(undefined);
   const { data, loading, error } = useFetch("/suppliers");
-  const material = useRef();
-  const quantity = useRef();
 
   const handleClick = async (e) => {
-    if (supplierId !== "") {
-      alert("Vui lòng chọn nhà cung cấp");
-    }
     e.preventDefault();
     const importMaterial = {
-      material: material.current.value,
-      quantity: quantity.current.value,
+      userId: user ? user._id : "",
+      supplierId: supplierId ? supplierId : undefined,
+      materials: localStorage.getItem("iprmaterial")
+        ? JSON.parse(localStorage.getItem("iprmaterial"))
+        : undefined,
     };
-
-    console.log(importMaterial);
-
     try {
-      await axios.post(`/imports/${supplierId}`, importMaterial);
+      await axios.post(`/imports/`, importMaterial);
     } catch (err) {
       console.log(err);
     }
@@ -47,7 +45,7 @@ export default function NewImport() {
         </div>
 
         <div className="bottom">
-          <AddDeleteTableRows material={material} quantity={quantity} />
+          <AddDeleteTableRows />
 
           <div className="right">
             <form>
@@ -69,7 +67,9 @@ export default function NewImport() {
                 </select>
               </div>
 
-              <button onClick={handleClick}>Send</button>
+              <button type="submit" onClick={handleClick}>
+                Send
+              </button>
             </form>
           </div>
         </div>

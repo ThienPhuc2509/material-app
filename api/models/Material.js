@@ -20,9 +20,10 @@ const MaterialSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
-    provider: {
+    supplierId: {
       type: [String],
     },
+    //supplierId
   },
   { timestamps: true }
 );

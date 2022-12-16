@@ -8,16 +8,19 @@ export default function DatatableRoom({ wareColumns }) {
   const location = useLocation();
   const path = location.pathname.split("/")[1];
   const [list, setList] = useState([]);
+  const [material, setMaterial] = useState([]);
   const [warehousesId, setWarehousesId] = useState(undefined);
 
   const { data, loading, error } = useFetch(`/${path}`);
   useEffect(() => {
-    try {
-      
-    } catch (err) {
-      console.log(err)
-    }
+    const getMaterial = async () => {
+      try {
+        const res = await axios.get("/materials");
+        setMaterial(res.data);
+      } catch (err) {}
+    };
     setList(data);
+    getMaterial();
   }, [data]);
   const handleDelete = async (id) => {
     try {

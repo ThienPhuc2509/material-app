@@ -15,8 +15,7 @@ export const createMaterial = async (req, res, next) => {
           // id vật liệu
           // materials: [savedMaterial._id, savedMaterial.name],
           materials: {
-            name: savedMaterial.name,
-            quantity: savedMaterial.quantity,
+            materialId: savedMaterial._id,
           },
         },
       });
@@ -81,6 +80,7 @@ export const deleteMaterial = async (req, res, next) => {
 export const getMaterial = async (req, res, next) => {
   try {
     const material = await Material.findById(req.params.id);
+    
     res.status(200).json(material);
   } catch (err) {
     next(err);

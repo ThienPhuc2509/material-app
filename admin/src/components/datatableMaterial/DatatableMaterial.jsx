@@ -50,7 +50,7 @@ export default function DatatableMaterial() {
       <div className="datatableTitle">
         {path === "materials" ? "Vật liệu" : ""}
         <Link to={`/${path}/import/new`} className="link">
-          Nhập kho
+          Nhập vật liệu
         </Link>
       </div>
       <DataGrid

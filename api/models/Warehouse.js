@@ -15,6 +15,7 @@ const WarehouseSchema = new mongoose.Schema({
 
   materials: {
     type: Array,
+    default:[]
   },
 });
 

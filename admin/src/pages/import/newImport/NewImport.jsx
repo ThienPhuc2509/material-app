@@ -40,7 +40,7 @@ export default function NewImport() {
         >
           <h1>Nhập hàng vào kho</h1>
           <Link to={`/materials/new`} className="link">
-            <div>Thêm vật liệu</div>
+            <div>Mua vật liệu mới</div>
           </Link>
         </div>
 

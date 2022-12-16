@@ -10,9 +10,13 @@ const FactorySchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    materialFactory: {
-      type: Array,
-    },
+    materials: [
+      {
+        materialId: { type: String },
+        quantity: { type: Number }, // số lượng factory
+      },
+
+    ],
   },
   { timestamps: true }
 );

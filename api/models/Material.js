@@ -21,7 +21,7 @@ const MaterialSchema = new mongoose.Schema(
       default: 0,
     },
     supplierId: {
-      type: [String],
+      type: String,
     },
     //supplierId
   },

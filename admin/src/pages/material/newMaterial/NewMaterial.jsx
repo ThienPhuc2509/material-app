@@ -1,7 +1,7 @@
 import "./newMaterial.scss";
 import Sidebar from "../../../components/sidebar/Sidebar";
 import Navbar from "../../../components/navbar/Navbar";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import useFetch from "../../../hooks/useFetch";
 import axios from "axios";
 import TextField from "@mui/material/TextField";
@@ -16,6 +16,8 @@ import InputLabel from "@mui/material/InputLabel";
 
 const NewMaterial = () => {
   const [warehousesId, setWarehousesId] = useState(undefined);
+  const [supplier, setSupplier] = useState([]);
+  const [supplierId, setSupplierId] = useState([]);
   const { data, loading, error } = useFetch("/warehouses");
   const navigate = useNavigate();
 
@@ -25,7 +27,17 @@ const NewMaterial = () => {
   const desc = useRef();
   // const from = useRef();
   const quantity = useRef();
-
+  useEffect(() => {
+    const getSupplier = async () => {
+      try {
+        const getData = await axios.get("/suppliers");
+        setSupplier(getData.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getSupplier();
+  }, []);
   const handleClick = async (e) => {
     if (warehousesId === undefined) {
       alert("Vui lòng chọn kho");
@@ -37,7 +49,7 @@ const NewMaterial = () => {
       unit: unit.current.value,
       desc: desc.current.value,
       // fromprod: from.current.value,
-      quantity: quantity.current.value,
+      supplierId:supplierId?supplierId:""
     };
 
     console.log(detailMaterial);
@@ -88,12 +100,7 @@ const NewMaterial = () => {
                     label="Giá tiền"
                     inputRef={price}
                   />
-                  <TextField
-                    required
-                    id="outlined-type"
-                    label="Số lượng"
-                    inputRef={quantity}
-                  />
+                  
                   <TextField
                     required
                     id="outlined-type"
@@ -120,6 +127,25 @@ const NewMaterial = () => {
                     >
                       {data &&
                         data.map((item) => (
+                          <MenuItem key={item._id} value={item._id}>
+                            {item.name}
+                          </MenuItem>
+                        ))}
+                    </Select>
+                  </FormControl>
+                  <FormControl sx={{ m: 1, width: "50ch" }}>
+                    <InputLabel id="demo-simple-select-label">
+                      Chọn Nhà cung cấp
+                    </InputLabel>
+                    <Select
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
+                      value={supplierId}
+                      label="Tình trạng"
+                      onChange={(e) => setSupplierId(e.target.value)}
+                    >
+                      {supplier &&
+                        supplier.map((item) => (
                           <MenuItem key={item._id} value={item._id}>
                             {item.name}
                           </MenuItem>

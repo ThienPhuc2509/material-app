@@ -16,7 +16,13 @@ import cors from "cors";
 const app = express();
 //middlewares
 
-app.use(cors());
+app.use(
+  cors({
+    origin: ["http://localhost:3000", "http://localhost:3001"],
+    credentials: true,
+    optionSuccessStatus: 200,
+  })
+);
 app.use(cookieParser());
 app.use(express.json());
 

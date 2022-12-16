@@ -17,10 +17,6 @@ const SupplierSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    materialProvide: {
-      type: String,
-      required: true,
-    },
   },
   { timestamps: true }
 );

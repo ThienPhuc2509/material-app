@@ -3,20 +3,11 @@ import Material from "../models/Material.js";
 import { createError } from "../utils/error.js";
 
 export const createSupplier = async (req, res, next) => {
-  const materialId = req.params.materialid;
   const newSupplier = new Supplier(req.body);
 
   try {
     const savedSupplier = await newSupplier.save();
-    try {
-      await Material.findByIdAndUpdate(materialId, {
-        $push: {
-          supplierId: savedSupplier.name,
-        },
-      });
-    } catch (err) {
-      next(err);
-    }
+
     res.status(200).json(savedSupplier);
     console.log(savedSupplier);
   } catch (err) {

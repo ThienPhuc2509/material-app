@@ -1,19 +1,35 @@
 import React, { useState, useEffect } from "react";
 import useFetch from "../../../hooks/useFetch";
+import axios from "axios";
+
 export default function AddDeleteTableRows() {
   const { data, loading, error } = useFetch("/materials");
   const [material, setMaterial] = useState([]);
   const [materialId, setMaterialId] = useState({});
   const [quantity, setQuantity] = useState(0);
   const [rowsData, setRowsData] = useState([]);
-
+  const [supplier, setSupplier] = useState([]);
+  const [supplierId, setSupplierId] = useState(undefined);
   useEffect(() => {
     setMaterial(data);
   }, [data, materialId]);
+
+  useEffect(() => {
+    const getSupplier = async () => {
+      try {
+        const res = await axios.get("/suppliers");
+        setSupplier(res.data);
+        console.log(res.data);
+      } catch (err) {}
+    };
+    getSupplier();
+  }, [supplierId]);
+
   const addTableRows = () => {
     const rowsInput = {
       materialId: "",
       quantity: "",
+      supplierId: "",
     };
     setRowsData([...rowsData, rowsInput]);
     localStorage.setItem(
@@ -38,7 +54,15 @@ export default function AddDeleteTableRows() {
     let rowsInput = [...rowsData];
     rowsInput[index][name] = value;
     setRowsData(rowsInput);
-    //console.log(rowsInput);
+    localStorage.setItem("iprmaterial", JSON.stringify(rowsData));
+  };
+  const handleSupplier = (index, event) => {
+    const { name, value } = event.target;
+    console.log(index, name, value);
+    setSupplierId(value);
+    let rowsInput = [...rowsData];
+    rowsInput[index][name] = value;
+    setRowsData(rowsInput);
     localStorage.setItem("iprmaterial", JSON.stringify(rowsData));
   };
   const handleChange = (index, event) => {
@@ -59,6 +83,7 @@ export default function AddDeleteTableRows() {
               <tr>
                 <th>Vật liệu</th>
                 <th>Số lượng</th>
+                <th>Nhà cung cấp</th>
                 <th>
                   <button
                     className="btn btn-outline-success"
@@ -78,6 +103,7 @@ export default function AddDeleteTableRows() {
                         name="materialId"
                         onChange={(evnt) => HandleMaterial(index, evnt)}
                       >
+                        <option value="">-Chọn vật liệu-</option>
                         {material &&
                           material.map((i) => (
                             <option key={i._id} value={i._id}>
@@ -98,7 +124,20 @@ export default function AddDeleteTableRows() {
                         min="0"
                       />
                     </td>
-
+                    <td>
+                      <select
+                        name="supplierId"
+                        onChange={(e) => handleSupplier(index, e)}
+                      >
+                        <option value="">-Chọn nhà cung cấp-</option>
+                        {supplier &&
+                          supplier.map((hotel) => (
+                            <option key={hotel._id} value={hotel._id}>
+                              {hotel.name}
+                            </option>
+                          ))}
+                      </select>
+                    </td>
                     <td>
                       <button
                         className="btn btn-outline-danger"
@@ -113,7 +152,6 @@ export default function AddDeleteTableRows() {
             </tbody>
           </table>
         </div>
-        <div className="col-sm-4"></div>
       </div>
     </div>
   );

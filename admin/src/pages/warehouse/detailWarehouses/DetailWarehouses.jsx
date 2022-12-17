@@ -8,20 +8,24 @@ import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
 
 const DetailWarehouses = () => {
+  const { data, loading, error } = useFetch("/materials");
   const location = useLocation();
   const path = location.pathname.split("/")[1];
   const idP = location.pathname.split("/")[2];
+  const [wareHouse, setWareHouse] = useState([]);
   const [material, setMaterial] = useState([]);
   useEffect(() => {
     const getMaterial = async () => {
       try {
         const res = await axios.get(`/warehouses/find/${idP}`);
-        setMaterial(res.data);
+        setMaterial(data.filter((i) => i.warehousesId === idP));
+        res.data.materials = material;
+        setWareHouse(res.data);
         localStorage.setItem("editWarehouse", JSON.stringify(res.data));
       } catch (err) {}
     };
     getMaterial();
-  }, [idP]);
+  }, [material]);
 
   return (
     <div className="single">
@@ -41,17 +45,17 @@ const DetailWarehouses = () => {
               <div className="details">
                 <div className="detailItem">
                   <span className="itemKey">Kho:</span>
-                  <span className="itemValue">{material.name}</span>
+                  <span className="itemValue">{wareHouse.name}</span>
                 </div>
                 <div className="detailItem">
                   <span className="itemKey">Loại:</span>
-                  <span className="itemValue">{material.type}</span>
+                  <span className="itemValue">{wareHouse.type}</span>
                 </div>
 
                 <div className="detailItem">
                   <span className="itemKey">Tình trạng:</span>
                   <span className="itemValue">
-                    {material.state ? (
+                    {wareHouse.state ? (
                       <span style={{ color: "green", fontWeight: "bold" }}>
                         Đang hoạt động
                       </span>
@@ -65,7 +69,7 @@ const DetailWarehouses = () => {
 
                 <div className="detailItem">
                   <span className="itemKey">Các loại vật liệu:</span>
-                  {material.materials?.map((i) => {
+                  {wareHouse.materials?.map((i) => {
                     return (
                       <Grid container spacing={2}>
                         <Grid item xs={6} className="itemValue">

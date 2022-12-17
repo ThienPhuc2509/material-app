@@ -4,7 +4,7 @@ import Warehouse from "../models/Warehouse.js";
 import { createError } from "../utils/error.js";
 
 export const createMaterial = async (req, res, next) => {
-  const warehouseId = req.params.warehouseid;
+  const warehouseId = req.body.warehouseid;
   const newMaterial = new Material(req.body);
 
   try {
@@ -23,7 +23,6 @@ export const createMaterial = async (req, res, next) => {
       next(err);
     }
     res.status(200).json(savedMaterial);
-    console.log(savedMaterial);
   } catch (err) {
     next(err);
   }
@@ -80,7 +79,7 @@ export const deleteMaterial = async (req, res, next) => {
 export const getMaterial = async (req, res, next) => {
   try {
     const material = await Material.findById(req.params.id);
-    
+
     res.status(200).json(material);
   } catch (err) {
     next(err);

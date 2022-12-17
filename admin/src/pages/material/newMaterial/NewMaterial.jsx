@@ -49,13 +49,14 @@ const NewMaterial = () => {
       unit: unit.current.value,
       desc: desc.current.value,
       // fromprod: from.current.value,
-      supplierId:supplierId?supplierId:""
+      supplierId: supplierId ? supplierId : "",
+      warehousesId: warehousesId ? warehousesId : "",
     };
 
     console.log(detailMaterial);
 
     try {
-      await axios.post(`/materials/${warehousesId}`, detailMaterial);
+      await axios.post(`/materials`, detailMaterial);
 
       navigate("/materials");
     } catch (err) {
@@ -100,7 +101,7 @@ const NewMaterial = () => {
                     label="Giá tiền"
                     inputRef={price}
                   />
-                  
+
                   <TextField
                     required
                     id="outlined-type"

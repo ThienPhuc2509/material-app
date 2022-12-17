@@ -53,27 +53,6 @@ export const warehouseColumns = [
     width: 140,
   },
   {
-    field: "materials",
-    headerName: "Vật liệu",
-    width: 200,
-    renderCell: (params) =>
-      console.log(params),
-      // <ul>
-      //   {params.value.map((role, index) => (
-      //     <div key={index}>
-      //       <li style={{ listStyle: "none" }}>
-      //         <b>Tên:</b> {role.name}
-      //       </li>
-      //       <li style={{ listStyle: "none" }}>
-      //         <b>Số lượng:</b> {role.quantity}
-      //       </li>
-      //     </div>
-      //   ))}
-      // </ul>
-
-    type: "string",
-  },
-  {
     field: "state",
     headerName: "Tình trạng",
     width: 230,

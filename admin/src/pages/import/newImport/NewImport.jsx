@@ -18,9 +18,9 @@ export default function NewImport() {
     const importMaterial = {
       userId: user ? user._id : "",
       supplierId: supplierId ? supplierId : undefined,
-      materials: localStorage.getItem("iprmaterial")
-        ? JSON.parse(localStorage.getItem("iprmaterial"))
-        : undefined,
+        materials: localStorage.getItem("iprmaterial")
+          ? JSON.parse(localStorage.getItem("iprmaterial"))
+          : undefined,
     };
     try {
       await axios.post(`/imports/`, importMaterial);

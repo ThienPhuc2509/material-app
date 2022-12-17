@@ -23,6 +23,9 @@ const MaterialSchema = new mongoose.Schema(
     supplierId: {
       type: String,
     },
+    warehousesId: {
+      type: String,
+    },
     //supplierId
   },
   { timestamps: true }

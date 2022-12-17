@@ -7,12 +7,12 @@ import "./newImport.scss";
 import AddDeleteTableRows from "./AddDeleteTableRows";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../context/AuthContext";
-
+import { useNavigate } from "react-router-dom";
 export default function NewImport() {
   const { user } = useContext(AuthContext);
   // const [supplierId, setSupplierId] = useState(undefined);
   // const { data, loading, error } = useFetch("/suppliers");
-
+  const navigate = useNavigate();
   const handleClick = async (e) => {
     // if (supplierId === undefined) {
     //   alert("Vui lòng chọn nhà cung cấp");
@@ -31,6 +31,7 @@ export default function NewImport() {
     };
     try {
       await axios.post(`/imports/`, importMaterial);
+      navigate("/imports");
     } catch (err) {
       console.log(err);
     }

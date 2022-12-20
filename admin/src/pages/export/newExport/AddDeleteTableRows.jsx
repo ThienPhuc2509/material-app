@@ -100,12 +100,15 @@ export default function AddDeleteTableRows() {
                     </td>
                     <td>
                       <input
+                        style={{ width: "100%" }}
                         type="number"
                         onChange={(evnt) => handleChange(index, evnt)}
                         name="quantity"
                         className="form-control"
                         required
-                        placeholder={`Số lượng ${quantity}`}
+                        placeholder={`Số lượng hiện có: ${
+                          quantity ? quantity : "..."
+                        }`}
                         max={quantity ? quantity : "0"}
                         min="0"
                       />

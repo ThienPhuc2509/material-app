@@ -16,7 +16,17 @@ export const createExport = async (req, res, next) => {
           ? updatedMaterial.quantity - i.quantity
           : 0;
       await updatedMaterial.save();
-      //console.log(updatedMaterial);
+      try {
+        await Factory.findByIdAndUpdate(req.body.factoryId, {
+          $push: {
+            // id vật liệu
+            // materials: [savedMaterial._id, savedMaterial.name],
+            materials: req.body.materials,
+          },
+        });
+      } catch (err) {
+        next(err);
+      }
     });
     res.status(200).json(savedExport);
   } catch (err) {
@@ -38,7 +48,6 @@ export const updateExport = async (req, res, next) => {
           ? updatedMaterial.quantity - i.quantity
           : 0;
       await updatedMaterial.save();
-      //console.log(updatedMaterial);
     });
     res.status(200).json(updatedExport);
   } catch (err) {

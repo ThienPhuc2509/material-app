@@ -5,8 +5,10 @@ import Sidebar from "../../../components/sidebar/Sidebar";
 import Navbar from "../../../components/navbar/Navbar";
 import AddDeleteTableRows from "./AddDeleteTableRows";
 import { AuthContext } from "../../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 export default function NewExport() {
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
   console.log(user._id);
   const [facetoriesId, setFacetoriesId] = useState(undefined);
   const [materialId, setMaterialId] = useState(undefined);
@@ -15,6 +17,9 @@ export default function NewExport() {
   // const {selected, setSelected} = useState()
 
   const handleClick = async (e) => {
+    if (facetoriesId === undefined) {
+      alert("Vui lòng chọn phân xưởng");
+    }
     e.preventDefault();
     const exportMaterial = {
       userId: user ? user._id : "",
@@ -26,6 +31,7 @@ export default function NewExport() {
 
     try {
       await axios.post(`/exports/`, exportMaterial);
+      navigate("/exports");
     } catch (err) {
       console.log(err);
     }
@@ -51,14 +57,13 @@ export default function NewExport() {
                 id="facetoriesId"
                 onChange={(e) => setFacetoriesId(e.target.value)}
               >
-                {loading
-                  ? "loading"
-                  : data &&
-                    data.map((hotel) => (
-                      <option key={hotel._id} value={hotel._id}>
-                        {hotel.name}
-                      </option>
-                    ))}
+                <option value="">-Chọn phân xưởng-</option>
+                {data &&
+                  data.map((hotel) => (
+                    <option key={hotel._id} value={hotel._id}>
+                      {hotel.name}
+                    </option>
+                  ))}
               </select>
             </div>
             <button type="submit" onClick={handleClick}>

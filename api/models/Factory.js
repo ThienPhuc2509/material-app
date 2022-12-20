@@ -15,8 +15,8 @@ const FactorySchema = new mongoose.Schema(
         materialId: { type: String },
         quantity: { type: Number }, // số lượng factory
       },
-
     ],
+    isDelete: { type: Boolean, default: false },
   },
   { timestamps: true }
 );

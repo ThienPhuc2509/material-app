@@ -26,7 +26,7 @@ const MaterialSchema = new mongoose.Schema(
     warehousesId: {
       type: String,
     },
-    //supplierId
+    isDelete: { type: Boolean, default: false },
   },
   { timestamps: true }
 );

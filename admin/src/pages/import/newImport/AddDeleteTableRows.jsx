@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from "react";
 import useFetch from "../../../hooks/useFetch";
+import axios from "axios";
+
 export default function AddDeleteTableRows() {
   const { data, loading, error } = useFetch("/materials");
   const [material, setMaterial] = useState([]);
   const [materialId, setMaterialId] = useState({});
   const [quantity, setQuantity] = useState(0);
   const [rowsData, setRowsData] = useState([]);
-
+  const [supplier, setSupplier] = useState([]);
+  const [supplierId, setSupplierId] = useState(undefined);
   useEffect(() => {
     setMaterial(data);
   }, [data, materialId]);
+
   const addTableRows = () => {
     const rowsInput = {
       materialId: "",
@@ -38,7 +42,15 @@ export default function AddDeleteTableRows() {
     let rowsInput = [...rowsData];
     rowsInput[index][name] = value;
     setRowsData(rowsInput);
-    //console.log(rowsInput);
+    localStorage.setItem("iprmaterial", JSON.stringify(rowsData));
+  };
+  const handleSupplier = (index, event) => {
+    const { name, value } = event.target;
+    console.log(index, name, value);
+    setSupplierId(value);
+    let rowsInput = [...rowsData];
+    rowsInput[index][name] = value;
+    setRowsData(rowsInput);
     localStorage.setItem("iprmaterial", JSON.stringify(rowsData));
   };
   const handleChange = (index, event) => {
@@ -78,6 +90,7 @@ export default function AddDeleteTableRows() {
                         name="materialId"
                         onChange={(evnt) => HandleMaterial(index, evnt)}
                       >
+                        <option value="">-Chọn vật liệu-</option>
                         {material &&
                           material.map((i) => (
                             <option key={i._id} value={i._id}>
@@ -113,7 +126,6 @@ export default function AddDeleteTableRows() {
             </tbody>
           </table>
         </div>
-        <div className="col-sm-4"></div>
       </div>
     </div>
   );

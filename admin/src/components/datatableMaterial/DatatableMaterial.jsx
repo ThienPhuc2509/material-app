@@ -7,13 +7,28 @@ import axios from "axios";
 import { materialColumns } from "./../../datatablesource";
 export default function DatatableMaterial() {
   const location = useLocation();
-  const path = location.pathname.split("/")[1];
+  // const path = location.pathname.split("/")[1];
   const [list, setList] = useState([]);
   //   const [warehousesId, setWarehousesId] = useState(undefined);
-  const { data, loading, error } = useFetch(`/${path}`);
+  const { data, loading, error } = useFetch(`/materials`);
+  const [supplier, setSupplier] = useState([]);
+  // console.log(data.map((item) => item.supplierId));
+
   useEffect(() => {
-    setList(data);
-  }, [data]);
+    const getSupplier = async () => {
+      try {
+        const res = await axios.get(`/suppliers`);
+        const filterSupplierId = res.data.map((item) => item._id);
+        setSupplier(
+          data.filter((item) => item.supplierId === filterSupplierId)
+        );
+        res.data.supplierId = supplier;
+        setList(data);
+      } catch (e) {}
+    };
+    getSupplier();
+  }, [supplier]);
+
   //   const handleDelete = async (id) => {
   //     try {
   //       await axios.delete(`/${path}/${warehousesId}/${id}`);
@@ -48,8 +63,8 @@ export default function DatatableMaterial() {
   return (
     <div className="datatable">
       <div className="datatableTitle">
-        {path === "materials" ? "Vật liệu" : ""}
-        <Link to={`/${path}/import/new`} className="link">
+        {/* {path === "materials" ? "Vật liệu" : ""} */}
+        <Link to={`/materials/import/new`} className="link">
           Nhập vật liệu
         </Link>
       </div>

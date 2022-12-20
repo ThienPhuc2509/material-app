@@ -7,26 +7,34 @@ import "./newImport.scss";
 import AddDeleteTableRows from "./AddDeleteTableRows";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../context/AuthContext";
-
+import { useNavigate } from "react-router-dom";
 export default function NewImport() {
   const { user } = useContext(AuthContext);
-  const [supplierId, setSupplierId] = useState(undefined);
-  const { data, loading, error } = useFetch("/suppliers");
-
+  // const [supplierId, setSupplierId] = useState(undefined);
+  // const { data, loading, error } = useFetch("/suppliers");
+  const navigate = useNavigate();
   const handleClick = async (e) => {
+    // if (supplierId === undefined) {
+    //   alert("Vui lòng chọn nhà cung cấp");
+    // }
     e.preventDefault();
     const importMaterial = {
       userId: user ? user._id : "",
-      supplierId: supplierId ? supplierId : undefined,
-        materials: localStorage.getItem("iprmaterial")
-          ? JSON.parse(localStorage.getItem("iprmaterial"))
-          : undefined,
+      materials: localStorage.getItem("iprmaterial")
+        ? JSON.parse(localStorage.getItem("iprmaterial"))
+        : undefined,
     };
     try {
       await axios.post(`/imports/`, importMaterial);
+      navigate("/imports");
     } catch (err) {
       console.log(err);
     }
+    console.log(
+      JSON.parse(localStorage.getItem("iprmaterial"))
+        .map((item) => item.supplierId)
+        .join(" ")
+    );
   };
 
   return (
@@ -49,7 +57,7 @@ export default function NewImport() {
 
           <div className="right">
             <form>
-              <div className="formInput">
+              {/* <div className="formInput">
                 <label>Chọn nhà cung cấp</label>
                 <select
                   id="supplierId"
@@ -66,7 +74,7 @@ export default function NewImport() {
                       ))}
                 </select>
               </div>
-
+ */}
               <button type="submit" onClick={handleClick}>
                 Send
               </button>

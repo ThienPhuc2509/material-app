@@ -1,5 +1,5 @@
 export const userColumns = [
-  { field: "_id", headerName: "ID", width: 70 },
+  // { field: "_id", headerName: "ID", width: 70 },
   {
     field: "username",
     headerName: "User",
@@ -41,7 +41,7 @@ export const userColumns = [
 ];
 
 export const warehouseColumns = [
-  { field: "_id", headerName: "ID", width: 250 },
+  // { field: "_id", headerName: "ID", width: 250 },
   {
     field: "name",
     headerName: "Tên kho",
@@ -49,8 +49,8 @@ export const warehouseColumns = [
   },
   {
     field: "type",
-    headerName: "Loại",
-    width: 140,
+    headerName: "Mô tả",
+    width: 200,
   },
   {
     field: "state",
@@ -67,11 +67,11 @@ export const warehouseColumns = [
 ];
 
 export const materialColumns = [
-  { field: "_id", headerName: "ID", width: 230 },
+  // { field: "_id", headerName: "ID", width: 230 },
   {
     field: "name",
     headerName: "Tên vật liệu",
-    width: 100,
+    width: 150,
   },
   {
     field: "price",
@@ -86,22 +86,24 @@ export const materialColumns = [
   {
     field: "desc",
     headerName: "Mô tả",
-    width: 100,
+    width: 190,
   },
   {
     field: "quantity",
     headerName: "Số lượng",
     width: 100,
   },
-  {
-    field: "supplierId",
-    headerName: "Nhà cung cấp",
-    width: 100,
-  },
+  // {
+  //   field: "supplierId",
+  //   headerName: "Nhà cung cấp",
+  //   width: 250,
+  //   renderCell: (params) => {
+  //   },
+  // },
 ];
 
 export const factoryColumns = [
-  { field: "_id", headerName: "ID", width: 170 },
+  // { field: "_id", headerName: "ID", width: 170 },
   {
     field: "name",
     headerName: "Phân xưởng",
@@ -113,37 +115,37 @@ export const factoryColumns = [
     width: 230,
   },
   {
-    field: "materialFactory",
+    field: "materials",
     headerName: "Vật liệu",
     width: 200,
   },
 ];
 
 export const supplierColumns = [
-  { field: "_id", headerName: "ID", width: 70 },
+  // { field: "_id", headerName: "ID", width: 70 },
   {
     field: "name",
     headerName: "Nhà cung cấp",
-    width: 230,
+    width: 180,
   },
   {
     field: "email",
     headerName: "Email",
-    width: 100,
+    width: 180,
   },
   {
     field: "address",
     headerName: "Địa chỉ",
-    width: 100,
+    width: 180,
   },
   {
     field: "phone",
     headerName: "Số điện thoại",
-    width: 100,
+    width: 120,
   },
 ];
 export const importColumns = [
-  { field: "_id", headerName: "ID", width: 70 },
+  // { field: "_id", headerName: "ID", width: 70 },
   {
     field: "name",
     headerName: "Vật liệu",
@@ -171,7 +173,7 @@ export const importColumns = [
   },
 ];
 export const exportColumns = [
-  { field: "_id", headerName: "ID", width: 70 },
+  // { field: "_id", headerName: "ID", width: 70 },
   {
     field: "materials",
     headerName: "Vật liệu",

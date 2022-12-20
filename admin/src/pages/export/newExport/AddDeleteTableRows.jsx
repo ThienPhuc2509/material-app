@@ -83,6 +83,7 @@ export default function AddDeleteTableRows() {
                         name="materialId"
                         onChange={(evnt) => HandleMaterial(index, evnt)}
                       >
+                        <option value="">-Chọn vật liệu-</option>
                         {material &&
                           material.map((i) => (
                             <option key={i._id} value={i._id}>

@@ -19,11 +19,9 @@ export const createImport = async (req, res, next) => {
 
 export const updateImport = async (req, res, next) => {
   try {
-    const updatedImport = await Import.findByIdAndUpdate(
-      req.params.id,
-      { $set: req.body },
-      { new: true }
-    );
+    const updatedImport = await Import.findByIdAndUpdate(req.params.id, {
+      isDelete: true,
+    });
     res.status(200).json(updatedImport);
   } catch (err) {
     next(err);

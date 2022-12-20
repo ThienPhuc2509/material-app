@@ -2,8 +2,6 @@ import React from "react";
 import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
 import List from "./pages/list/List";
-import ListWareHouse from "./pages/listWarehouse/ListWareHouse";
-import ListMaterial from "./pages/listMaterial/ListMaterial";
 
 import { Routes, Route, Navigate } from "react-router-dom";
 import { productInputs, userInputs } from "./formSource";
@@ -98,7 +96,7 @@ const Router = () => {
             index
             element={
               <ProtectedRoute>
-                <ListWareHouse wareColumns={warehouseColumns} />
+                <List columns={warehouseColumns} />
               </ProtectedRoute>
             }
           />
@@ -132,7 +130,7 @@ const Router = () => {
             index
             element={
               <ProtectedRoute>
-                <ListMaterial materialColumns={materialColumns} />
+                <List columns={materialColumns} />
               </ProtectedRoute>
             }
           />

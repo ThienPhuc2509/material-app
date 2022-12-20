@@ -14,11 +14,9 @@ export const createFactory = async (req, res, next) => {
 
 export const updateFactory = async (req, res, next) => {
   try {
-    const updatedFactory = await Factory.findByIdAndUpdate(
-      req.params.id,
-      { $set: req.body },
-      { new: true }
-    );
+    const updatedFactory = await Factory.findByIdAndUpdate(req.params.id, {
+      isDelete: true,
+    });
     res.status(200).json(updatedFactory);
   } catch (err) {
     next(err);

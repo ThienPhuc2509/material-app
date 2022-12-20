@@ -9,24 +9,49 @@ import axios from "axios";
 const Datatable = ({ columns }) => {
   const location = useLocation();
   const path = location.pathname.split("/")[1];
-  console.log(path);
   const [list, setList] = useState([]);
   const { data, loading, error } = useFetch(`/${path}`);
+  const pathList = data.filter((item) => item.isDelete === false);
   useEffect(() => {
-    setList(data);
+    setList(pathList);
   }, [data]);
-  console.log(list);
+  function pathswitch({ path }) {
+    switch (path) {
+      case "users":
+        return <div>Người dùng</div>;
+      case "warehouses":
+        return <div>Kho</div>;
+      case "factories":
+        return <div>Phân xưởng</div>;
+      case "materials":
+        return <div>Vật liệu</div>;
+      case "suppliers":
+        return <div>Nhà cung cấp</div>;
+      case "imports":
+        return <div>Nhập kho</div>;
+      case "exports":
+        return <div>Xuất kho</div>;
+      default:
+        return null;
+    }
+  }
+
   const handleDelete = async (id) => {
-    try {
-      await axios.delete(`/${path}/${id}`);
-      setList(list.filter((item) => item._id !== id));
-    } catch (err) {}
+    const answer = window.confirm(`Bạn có chắc chắn muốn xóa`);
+    if (answer) {
+      try {
+        await axios.put(`/${path}/${id}`);
+        setList(list.filter((item) => item._id !== id));
+      } catch (err) {
+        console.log(err);
+      }
+    }
   };
 
   const actionColumn = [
     {
       field: "action",
-      headerName: "Action",
+      headerName: "Thao tác",
       width: 200,
       renderCell: (params) => {
         return (
@@ -48,26 +73,6 @@ const Datatable = ({ columns }) => {
       },
     },
   ];
-  function pathswitch({ path }) {
-    switch (path) {
-      case "users":
-        return <div>Người dùng</div>;
-      case "warehouses":
-        return <div>Kho</div>;
-      case "factories":
-        return <div>Phân xưởng</div>;
-      case "materials":
-        return <div>Vật liệu</div>;
-      case "suppliers":
-        return <div>Nhà cung cấp</div>;
-      case "imports":
-        return <div>Nhập kho</div>;
-      case "exports":
-        return <div>Xuất kho</div>;
-      default:
-        return null;
-    }
-  }
 
   return (
     <div className="datatable">

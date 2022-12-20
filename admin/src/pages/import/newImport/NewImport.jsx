@@ -20,11 +20,6 @@ export default function NewImport() {
     e.preventDefault();
     const importMaterial = {
       userId: user ? user._id : "",
-      supplierId: localStorage.getItem("iprmaterial")
-        ? JSON.parse(localStorage.getItem("iprmaterial"))
-            .map((item) => item.supplierId)
-            .join(" ")
-        : undefined,
       materials: localStorage.getItem("iprmaterial")
         ? JSON.parse(localStorage.getItem("iprmaterial"))
         : undefined,

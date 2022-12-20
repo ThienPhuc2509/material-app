@@ -93,11 +93,13 @@ export const materialColumns = [
     headerName: "Số lượng",
     width: 100,
   },
-  {
-    field: "supplierId",
-    headerName: "Nhà cung cấp",
-    width: 190,
-  },
+  // {
+  //   field: "supplierId",
+  //   headerName: "Nhà cung cấp",
+  //   width: 250,
+  //   renderCell: (params) => {
+  //   },
+  // },
 ];
 
 export const factoryColumns = [

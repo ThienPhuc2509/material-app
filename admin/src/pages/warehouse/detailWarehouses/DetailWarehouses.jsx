@@ -21,6 +21,7 @@ const DetailWarehouses = () => {
         setMaterial(data.filter((i) => i.warehousesId === idP));
         res.data.materials = material;
         setWareHouse(res.data);
+        console.log((res.data.materials = material));
         localStorage.setItem("editWarehouse", JSON.stringify(res.data));
       } catch (err) {}
     };

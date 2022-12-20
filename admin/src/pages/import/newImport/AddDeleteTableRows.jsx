@@ -14,22 +14,10 @@ export default function AddDeleteTableRows() {
     setMaterial(data);
   }, [data, materialId]);
 
-  useEffect(() => {
-    const getSupplier = async () => {
-      try {
-        const res = await axios.get("/suppliers");
-        setSupplier(res.data);
-        console.log(res.data);
-      } catch (err) {}
-    };
-    getSupplier();
-  }, [supplierId]);
-
   const addTableRows = () => {
     const rowsInput = {
       materialId: "",
       quantity: "",
-      supplierId: "",
     };
     setRowsData([...rowsData, rowsInput]);
     localStorage.setItem(
@@ -83,7 +71,6 @@ export default function AddDeleteTableRows() {
               <tr>
                 <th>Vật liệu</th>
                 <th>Số lượng</th>
-                <th>Nhà cung cấp</th>
                 <th>
                   <button
                     className="btn btn-outline-success"
@@ -124,20 +111,7 @@ export default function AddDeleteTableRows() {
                         min="0"
                       />
                     </td>
-                    <td>
-                      <select
-                        name="supplierId"
-                        onChange={(e) => handleSupplier(index, e)}
-                      >
-                        <option value="">-Chọn nhà cung cấp-</option>
-                        {supplier &&
-                          supplier.map((hotel) => (
-                            <option key={hotel._id} value={hotel._id}>
-                              {hotel.name}
-                            </option>
-                          ))}
-                      </select>
-                    </td>
+
                     <td>
                       <button
                         className="btn btn-outline-danger"

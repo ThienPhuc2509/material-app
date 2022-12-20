@@ -8,6 +8,7 @@ const ImportSchema = new mongoose.Schema({
       quantity: { type: Number },
     },
   ],
+  isDelete: { type: Boolean, default: false },
 });
 
 export default mongoose.model("Import", ImportSchema);

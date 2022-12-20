@@ -8,6 +8,7 @@ const ExportSchema = new mongoose.Schema({
       quantity: { type: Number }, // số lượng xuất
     },
   ],
+  isDelete: { type: Boolean, default: false },
 });
 
 export default mongoose.model("Export", ExportSchema);

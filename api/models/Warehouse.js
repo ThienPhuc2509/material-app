@@ -12,11 +12,11 @@ const WarehouseSchema = new mongoose.Schema({
     type: Boolean,
     required: true,
   },
-
   materials: {
     type: Array,
-    default:[]
+    default: [],
   },
+  isDelete: { type: Boolean, default: false },
 });
 
 export default mongoose.model("Warehouse", WarehouseSchema);

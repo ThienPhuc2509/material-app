@@ -1,8 +1,6 @@
-import "./single.scss";
 import Sidebar from "../../../components/sidebar/Sidebar";
 import Navbar from "../../../components/navbar/Navbar";
-import { Link, useLocation } from "react-router-dom";
-import axios from "axios";
+import { useLocation } from "react-router-dom";
 import useFetch from "../../../hooks/useFetch";
 
 const DetailUser = () => {
@@ -22,7 +20,7 @@ const DetailUser = () => {
             <h1 className="title">Thông tin người dùng</h1>
             <div className="item">
               <img
-                src="https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
+                src="https://i.ibb.co/MBtjqXQ/no-avatar.gif"
                 alt=""
                 className="itemImg"
               />
@@ -33,12 +31,12 @@ const DetailUser = () => {
                   <span className="itemValue">{data.email}</span>
                 </div>
                 <div className="detailItem">
-                  <span className="itemKey">Phone:</span>
+                  <span className="itemKey">Số điện thoại:</span>
                   <span className="itemValue">{data.phone}</span>
                 </div>
 
                 <div className="detailItem">
-                  <span className="itemKey">Country:</span>
+                  <span className="itemKey">Địa chỉ:</span>
                   <span className="itemValue">{data.country}</span>
                 </div>
               </div>

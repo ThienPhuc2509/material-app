@@ -38,11 +38,9 @@ export const createExport = async (req, res, next) => {
 
 export const updateExport = async (req, res, next) => {
   try {
-    const updatedExport = await Export.findByIdAndUpdate(
-      req.params.id,
-      { $set: req.body },
-      { new: true }
-    );
+    const updatedExport = await Export.findByIdAndUpdate(req.params.id, {
+      isDelete: true,
+    });
     updatedExport.materials.forEach(async (i) => {
       const updatedMaterial = await Material.findById(i.materialId);
       updatedMaterial.quantity =

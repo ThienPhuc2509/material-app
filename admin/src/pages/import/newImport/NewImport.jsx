@@ -76,7 +76,7 @@ export default function NewImport() {
               </div>
  */}
               <button type="submit" onClick={handleClick}>
-                Send
+                Xác nhận
               </button>
             </form>
           </div>

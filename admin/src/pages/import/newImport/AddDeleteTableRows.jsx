@@ -44,15 +44,7 @@ export default function AddDeleteTableRows() {
     setRowsData(rowsInput);
     localStorage.setItem("iprmaterial", JSON.stringify(rowsData));
   };
-  const handleSupplier = (index, event) => {
-    const { name, value } = event.target;
-    console.log(index, name, value);
-    setSupplierId(value);
-    let rowsInput = [...rowsData];
-    rowsInput[index][name] = value;
-    setRowsData(rowsInput);
-    localStorage.setItem("iprmaterial", JSON.stringify(rowsData));
-  };
+
   const handleChange = (index, event) => {
     const { name, value } = event.target;
     //console.log(index, name, value);
@@ -104,6 +96,7 @@ export default function AddDeleteTableRows() {
                         type="number"
                         onChange={(evnt) => handleChange(index, evnt)}
                         name="quantity"
+                        required
                         placeholder={`Số lượng hiện có: ${
                           quantity ? quantity : "..."
                         }`}

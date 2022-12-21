@@ -13,11 +13,9 @@ export const createWarehouse = async (req, res, next) => {
 };
 export const updateWarehouse = async (req, res, next) => {
   try {
-    const updatedWarehouse = await Warehouse.findByIdAndUpdate(
-      req.params.id,
-      { $set: req.body },
-      { new: true }
-    );
+    const updatedWarehouse = await Warehouse.findByIdAndUpdate(req.params.id, {
+      isDelete: true,
+    });
     res.status(200).json(updatedWarehouse);
   } catch (err) {
     next(err);

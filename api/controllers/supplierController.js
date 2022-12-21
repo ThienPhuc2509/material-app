@@ -17,11 +17,9 @@ export const createSupplier = async (req, res, next) => {
 
 export const updateSupplier = async (req, res, next) => {
   try {
-    const updatedSupplier = await Supplier.findByIdAndUpdate(
-      req.params.id,
-      { $set: req.body },
-      { new: true }
-    );
+    const updatedSupplier = await Supplier.findByIdAndUpdate(req.params.id, {
+      isDelete: true,
+    });
     res.status(200).json(updatedSupplier);
   } catch (err) {
     next(err);

@@ -74,7 +74,7 @@ const DetailWarehouses = () => {
                     return (
                       <Grid container spacing={2}>
                         <Grid item xs={6} className="itemValue">
-                          Tên sản phẩm: {i.name}
+                          {i.name}
                         </Grid>
                         <Grid item xs={6} className="itemValue">
                           Số lượng: {i.quantity}

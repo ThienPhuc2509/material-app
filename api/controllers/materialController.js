@@ -30,11 +30,9 @@ export const createMaterial = async (req, res, next) => {
 
 export const updateMaterial = async (req, res, next) => {
   try {
-    const updatedMaterial = await Material.findByIdAndUpdate(
-      req.params.id,
-      { $set: req.body },
-      { new: true }
-    );
+    const updatedMaterial = await Material.findByIdAndUpdate(req.params.id, {
+      isDelete: true,
+    });
     res.status(200).json(updatedMaterial);
   } catch (err) {
     next(err);

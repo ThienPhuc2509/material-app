@@ -67,7 +67,7 @@ export default function NewExport() {
               </select>
             </div>
             <button type="submit" onClick={handleClick}>
-              Send
+              Xác nhận
             </button>
           </div>
         </div>

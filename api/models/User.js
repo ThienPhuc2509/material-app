@@ -24,9 +24,14 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    isAdmin: {
-      type: Boolean,
-      default: false,
+    role: {
+      type: Number,
+      default: 0,
+      required: true,
+    },
+    managerId: {
+      type: String,
+      default: "",
     },
     isDelete: { type: Boolean, default: false },
   },

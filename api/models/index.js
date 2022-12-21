@@ -1,10 +1,10 @@
 const Export = require("./Export");
-const Factory = require("./Export");
-const Import = require("./Export");
-const Material = require("./Export");
-const Supplier = require("./Export");
-const User = require("./Export");
-const Warehouse = require("./Export");
+const Factory = require("./Factory");
+const Import = require("./Import");
+const Material = require("./Material");
+const Supplier = require("./Supplier");
+const User = require("./User");
+const Warehouse = require("./Warehouse");
 
 module.exports = {
   Export,

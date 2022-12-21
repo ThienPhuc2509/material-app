@@ -19,7 +19,7 @@ const SupplierSchema = new mongoose.Schema(
     phone: {
       type: String,
       required: true,
-      default: "",
+      default: "",                                                                                            
     },
     isDelete: { type: Boolean, default: false },
   },

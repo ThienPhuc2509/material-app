@@ -12,10 +12,6 @@ const WarehouseSchema = new mongoose.Schema({
     type: Boolean,
     required: true,
   },
-  materials: {
-    type: Array,
-    default: [],
-  },
   isDelete: { type: Boolean, default: false },
 });
 

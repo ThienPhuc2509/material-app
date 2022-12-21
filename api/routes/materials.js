@@ -17,7 +17,7 @@ router.post("/", verifyAdmin, createMaterial);
 // router.put("/availability/:id", updateMaterialAvailability);
 router.put("/:id", verifyAdmin, updateMaterial);
 //DELETE
-router.delete("/:id/:warehouseid", verifyAdmin, deleteMaterial);
+router.put("/delete/:id", verifyAdmin, deleteMaterial);
 //GET
 
 router.get("/find/:id", getMaterial);

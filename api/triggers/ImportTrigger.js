@@ -1,18 +1,10 @@
-const { Export: Import } = require("../models");
+import Import from "../models/Import.js";
 
-const GetQuantityImport = (req, res, next) => {
-  // trigger lấy số lượng Hóa đơn nhập mà Nhân viên đã thực hiện - userId
-  try {
-    const userId = req.params.userId;
-    if (!userId) return res.status(503).json("Invalid User");
-    const quantityUser = Import.where({ userId }).countDocuments();
-    if (quantityUser === 0) next();
-    else return res.status(504).json("Existing User");
-  } catch (error) {
-    res.status(500).json(err);
-  }
-};
-
-module.exports = {
-  GetQuantityImport,
+export const GetQuantityImport = async (userId, res) => {
+  //trigger lấy số lượng Hóa đơn nhập mà Nhân viên đã thực hiện - userId
+  // const userId = userId;
+  if (!userId) return res.status(503).json("Invalid User");
+  const quantityUser = await Import.find({ userId });
+  if (quantityUser.length > 0) return true;
+  else return false;
 };

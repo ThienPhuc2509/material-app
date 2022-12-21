@@ -9,7 +9,6 @@ export const createSupplier = async (req, res, next) => {
     const savedSupplier = await newSupplier.save();
 
     res.status(200).json(savedSupplier);
-    console.log(savedSupplier);
   } catch (err) {
     next(err);
   }
@@ -17,9 +16,13 @@ export const createSupplier = async (req, res, next) => {
 
 export const updateSupplier = async (req, res, next) => {
   try {
-    const updatedSupplier = await Supplier.findByIdAndUpdate(req.params.id, {
-      isDelete: true,
-    });
+    const updatedSupplier = await Supplier.findByIdAndUpdate(
+      req.params.id,
+      {
+        $set: req.body,
+      },
+      { new: true }
+    );
     res.status(200).json(updatedSupplier);
   } catch (err) {
     next(err);
@@ -27,8 +30,14 @@ export const updateSupplier = async (req, res, next) => {
 };
 export const deleteSupplier = async (req, res, next) => {
   try {
-    await Supplier.findByIdAndDelete(req.params.id);
-    res.status(200).json("Nhà cung cấp đã được xóa.");
+    const updatedSupplier = await Supplier.findByIdAndUpdate(
+      req.params.id,
+      {
+        $set: req.body,
+      },
+      { new: true }
+    );
+    res.status(200).json(updatedSupplier);
   } catch (err) {
     next(err);
   }

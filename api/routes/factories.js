@@ -17,7 +17,7 @@ router.post("/", verifyAdmin, createFactory);
 router.put("/:id", verifyAdmin, updateFactory);
 
 // DELETE
-router.delete("/:id", verifyAdmin, deleteFactory);
+router.put("/delete/:id", verifyAdmin, deleteFactory);
 
 // GET
 router.get("/find/:id", getFactory);

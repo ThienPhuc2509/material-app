@@ -17,7 +17,7 @@ router.post("/", verifyAdmin, createSupplier);
 router.put("/:id", verifyAdmin, updateSupplier);
 
 // DELETE
-router.delete("/:id/:materialid", verifyAdmin, deleteSupplier);
+router.put("/delete/:id", verifyAdmin, deleteSupplier);
 
 // GET
 router.get("/find/:id", getSupplier);

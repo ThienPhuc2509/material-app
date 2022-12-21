@@ -1,18 +1,33 @@
-const { Export } = require("../models");
+import Material from "../models/Material.js";
+import Export from "../models/Material.js";
+import Factory from "../models/Factory.js";
 
-const GetQuantityExport = (req, res, next) => {
-  // trigger lấy số lượng Hóa đơn xuất mà Nhân viên đã thực hiện - userId
-  try {
-    const userId = req.params.userId;
-      if (!userId) return res.status(503).json("Invalid User");
-      const quantityUser = Export.where({ userId }).countDocuments();
-      if (quantityUser === 0) next();
-      else return res.status(504).json("Existing User");
-  } catch (error) {
-    res.status(500).json(err);
-  }
+// trigger lấy số lượng Hóa đơn xuất mà Nhân viên đã thực hiện khi xóa Hóa đơn xuất - userId
+export const GetQuantityExport = async (userId) => {
+  
+  if (!userId) return false;
+  const quantityUser = Export.where({ userId }).countDocuments();
+  if (quantityUser === 0) return true
+  else return false
 };
 
-module.exports = {
-    GetQuantityExport
-}
+// trigger giảm số lượng vật liệu khi xuất kho
+export const DecreaseQuantity = async (materials) => {
+  materials.forEach(async (i) => {
+    const updatedMaterial = await Material.findById(i.materialId);
+    updatedMaterial.quantity =
+      updatedMaterial.quantity >= i.quantity
+        ? updatedMaterial.quantity - i.quantity
+        : 0;
+    await updatedMaterial.save();
+  });
+};
+
+// trigger cập nhập số lượng vật liệu cho Phân xưởng khi xuất khoa
+export const UpdatedMaterialFactory = async (factoryId, materials) => {
+  await Factory.findByIdAndUpdate(factoryId, {
+    $push: {
+      materials: materials,
+    },
+  });
+};

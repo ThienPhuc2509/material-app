@@ -2,26 +2,12 @@ import Material from "../models/Material.js";
 import Warehouse from "../models/Warehouse.js";
 // import Supplier from "../models/Supplier.js";
 import { createError } from "../utils/error.js";
+import { CheckExistingFactory } from "../triggers/MaterialTrigger.js";
 
 export const createMaterial = async (req, res, next) => {
-  const warehouseId = req.body.warehouseid;
-  const newMaterial = new Material(req.body);
-
   try {
+    const newMaterial = new Material(req.body);
     const savedMaterial = await newMaterial.save();
-    try {
-      await Warehouse.findByIdAndUpdate(warehouseId, {
-        $push: {
-          // id vật liệu
-          // materials: [savedMaterial._id, savedMaterial.name],
-          materials: {
-            materialId: savedMaterial._id,
-          },
-        },
-      });
-    } catch (err) {
-      next(err);
-    }
     res.status(200).json(savedMaterial);
   } catch (err) {
     next(err);
@@ -30,44 +16,33 @@ export const createMaterial = async (req, res, next) => {
 
 export const updateMaterial = async (req, res, next) => {
   try {
-    const updatedMaterial = await Material.findByIdAndUpdate(req.params.id, {
-      isDelete: true,
-    });
+    const updatedMaterial = await Material.findByIdAndUpdate(
+      req.params.id,
+      {
+        $set: req.body,
+      },
+      { new: true }
+    );
     res.status(200).json(updatedMaterial);
   } catch (err) {
     next(err);
   }
 };
-// export const updateMaterialAvailability = async (req, res, next) => {
-//   try {
-//     await Room.updateOne(
-//       { "roomNumbers._id": req.params.id },
-//       {
-//         $push: {
-//           "roomNumbers.$.unavailableDates": req.body.dates,
-//         },
-//       }
-//     );
-//     res.status(200).json("Room status has been updated.");
-//   } catch (err) {
-//     next(err);
-//   }
-// };
 
 // ************ Lưu ý
 
 export const deleteMaterial = async (req, res, next) => {
-  const warehouseId = req.params.warehouseid;
+  if (CheckExistingFactory(req.params.id) === true)
+    return res.status(500).json("Existing this material in Factoty");
   try {
-    await Material.findByIdAndDelete(req.params.id);
-    try {
-      await Warehouse.findByIdAndUpdate(warehouseId, {
-        $pull: { materials: req.params.id },
-      });
-    } catch (err) {
-      next(err);
-    }
-    res.status(200).json("Material has been deleted.");
+    const updatedMaterial = await Material.findByIdAndUpdate(
+      req.params.id,
+      {
+        $set: req.body,
+      },
+      { new: true }
+    );
+    res.status(200).json(updatedMaterial);
   } catch (err) {
     next(err);
   }
@@ -101,7 +76,6 @@ export const getMaterialSupplier = async (req, res, next) => {
       })
     );
     res.status(200).json(list);
-    console.log(list);
   } catch (err) {
     next(err);
   }

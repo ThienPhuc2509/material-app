@@ -5,29 +5,8 @@ import Factory from "../models/Factory.js";
 
 export const createExport = async (req, res, next) => {
   const newExport = new Export(req.body);
-  //console.log(newExport);
   try {
     const savedExport = await newExport.save();
-
-    savedExport.materials.forEach(async (i) => {
-      const updatedMaterial = await Material.findById(i.materialId);
-      updatedMaterial.quantity =
-        updatedMaterial.quantity >= i.quantity
-          ? updatedMaterial.quantity - i.quantity
-          : 0;
-      await updatedMaterial.save();
-      try {
-        await Factory.findByIdAndUpdate(req.body.factoryId, {
-          $push: {
-            // id vật liệu
-            // materials: [savedMaterial._id, savedMaterial.name],
-            materials: req.body.materials,
-          },
-        });
-      } catch (err) {
-        next(err);
-      }
-    });
     res.status(200).json(savedExport);
   } catch (err) {
     next(err);

@@ -13,9 +13,13 @@ export const createWarehouse = async (req, res, next) => {
 };
 export const updateWarehouse = async (req, res, next) => {
   try {
-    const updatedWarehouse = await Warehouse.findByIdAndUpdate(req.params.id, {
-      isDelete: true,
-    });
+    const updatedWarehouse = await Warehouse.findByIdAndUpdate(
+      req.params.id,
+      {
+        $set: req.body,
+      },
+      { new: true }
+    );
     res.status(200).json(updatedWarehouse);
   } catch (err) {
     next(err);
@@ -23,8 +27,14 @@ export const updateWarehouse = async (req, res, next) => {
 };
 export const deleteWarehouse = async (req, res, next) => {
   try {
-    await Warehouse.findByIdAndDelete(req.params.id);
-    res.status(200).json("Warehouse has been deleted.");
+    const updatedWarehouse = await Warehouse.findByIdAndUpdate(
+      req.params.id,
+      {
+        $set: req.body,
+      },
+      { new: true }
+    );
+    res.status(200).json(updatedWarehouse);
   } catch (err) {
     next(err);
   }
@@ -44,21 +54,6 @@ export const getWarehouses = async (req, res, next) => {
     const warehouses = await Warehouse.find();
 
     res.status(200).json(warehouses);
-  } catch (err) {
-    next(err);
-  }
-};
-
-export const getWarehouseRooms = async (req, res, next) => {
-  try {
-    const warehouse = await Warehouse.findById(req.params.id);
-    const list = await Promise.all(
-      warehouse.materials.map((item) => {
-        return Material.findById(item);
-      })
-    );
-    console.log(list);
-    res.status(200).json(list);
   } catch (err) {
     next(err);
   }

@@ -28,14 +28,18 @@ export const updateWarehouse = async (req, res, next) => {
   }
 };
 export const deleteWarehouse = async (req, res, next) => {
-  const checkUser = await CheckExistingUser(req.body.managerId);
+  const checkUser = await CheckExistingUser(req.params.id);
   if (checkUser === false) return res.status(505).json("Existing user manager");
-  const checkImport = CheckExistingImport(req.body.managerId);
+  const checkImport = await CheckExistingImport(req.params.id);
   if (checkImport === false) return res.status(505).json("Existing import");
   try {
-    let updatedWarehouse = await Warehouse.findById(req.params.id);
-    updateWarehouse.isDelete = true;
-    await updateWarehouse.save();
+    const updatedWarehouse = await Warehouse.findByIdAndUpdate(
+      req.params.id,
+      {
+        isDelete: true,
+      },
+      { new: true }
+    );
     res.status(200).json(updatedWarehouse);
   } catch (err) {
     next(err);

@@ -2,7 +2,7 @@ import Import from "../models/Import.js";
 import { IncreaseQuantity } from "../triggers/ImportTrigger.js";
 export const createImport = async (req, res, next) => {
   const newImport = new Import(req.body);
-  await IncreaseQuantity(req.body);
+  await IncreaseQuantity(req.body.materials);
   try {
     const savedImport = await newImport.save();
     res.status(200).json(savedImport);
@@ -13,7 +13,7 @@ export const createImport = async (req, res, next) => {
 
 export const updateImport = async (req, res, next) => {
   try {
-    await IncreaseQuantity(req.body);
+    await IncreaseQuantity(req.body.materials);
     const updatedImport = await Import.findByIdAndUpdate(
       req.params.id,
       {

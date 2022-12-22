@@ -19,6 +19,7 @@ import {
 // User
 import NewUser from "./pages/user/newUser/NewUser";
 import DetailUser from "./pages/user/detailUser/DetailUser";
+import EditUser from "./pages/user/editUser/EditUser";
 // Kho
 import NewWarehouses from "./pages/warehouse/newWarehouses/NewWarehouses";
 import DetailWarehouses from "./pages/warehouse/detailWarehouses/DetailWarehouses";
@@ -87,6 +88,14 @@ const Router = () => {
             element={
               <ProtectedRoute>
                 <NewUser title="Thêm người dùng" />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="edit"
+            element={
+              <ProtectedRoute>
+                <EditUser title="Chỉnh sửa thông tin người dùng" />
               </ProtectedRoute>
             }
           />

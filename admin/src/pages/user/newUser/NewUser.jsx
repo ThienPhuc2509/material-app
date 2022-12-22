@@ -50,9 +50,11 @@ const New = ({ title }) => {
     console.log(role);
   }, [role]);
   const WarehouseList = () => {
-    console.log(x);
-    return x.map((i) => <MenuItem value={i._id}>{i.name}</MenuItem>);
+    const w = x.map((i) => <MenuItem value={i._id}>{i.name}</MenuItem>);
+    console.log(w);
+    return w;
   };
+
   const FatoryList = () => {
     console.log(y);
     return y.map((i) => <MenuItem value={i._id}>{i.name}</MenuItem>);

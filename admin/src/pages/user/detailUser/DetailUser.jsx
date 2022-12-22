@@ -1,6 +1,6 @@
 import Sidebar from "../../../components/sidebar/Sidebar";
 import Navbar from "../../../components/navbar/Navbar";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import useFetch from "../../../hooks/useFetch";
 
 const DetailUser = () => {
@@ -8,7 +8,8 @@ const DetailUser = () => {
   const path = location.pathname.split("/")[1];
   const idP = location.pathname.split("/")[2];
   const { data, loading, error } = useFetch(`/${path}/find/${idP}`);
-  console.log(data);
+  localStorage.setItem("editUser", JSON.stringify(data));
+
   return (
     <div className="single">
       <Sidebar />
@@ -16,7 +17,11 @@ const DetailUser = () => {
         <Navbar />
         <div className="top">
           <div className="left">
-            <div className="editButton">Chỉnh sửa</div>
+            <div className="editButton">
+              <Link to="/users/edit" className="link">
+                Chỉnh sửa
+              </Link>
+            </div>
             <h1 className="title">Thông tin người dùng</h1>
             <div className="item">
               <img

@@ -19,6 +19,7 @@ const NewMaterial = () => {
   const [supplier, setSupplier] = useState([]);
   const [supplierId, setSupplierId] = useState([]);
   const { data, loading, error } = useFetch("/warehouses");
+  data.filter((item) => item.isDelete === true);
   const navigate = useNavigate();
 
   const name = useRef();

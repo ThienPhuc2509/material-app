@@ -60,7 +60,7 @@ export const getMaterial = async (req, res, next) => {
 };
 export const getMaterials = async (req, res, next) => {
   try {
-    const materials = await Material.find();
+    const materials = await Material.find({isDelete:false});
     res.status(200).json(materials);
   } catch (err) {
     next(err);

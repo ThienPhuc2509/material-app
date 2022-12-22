@@ -1,4 +1,5 @@
-import { createContext, useEffect, useReducer } from "react";
+import { createContext, useEffect, useReducer, useState } from "react";
+import axios from "axios";
 
 const INITIAL_STATE = {
   user: JSON.parse(localStorage.getItem("user")) || null,
@@ -41,8 +42,23 @@ const AuthReducer = (state, action) => {
 
 export const AuthContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AuthReducer, INITIAL_STATE);
+  const [users, setUsers] = useState();
+  const [materials, setMaterials] = useState();
+  const getData = async () => {};
+  useEffect(async () => {
+    const getData = async () => {
+      const usersdata = await axios.get(`/users/`);
 
-  useEffect(() => {
+      localStorage.setItem("users", JSON.stringify(usersdata.data));
+      setUsers(usersdata.data);
+    };
+    const getMaterial = async () => {
+      const materialsdata = await axios.get(`/materials/`);
+      localStorage.setItem("materials", JSON.stringify(materialsdata.data));
+      setMaterials(materialsdata.data);
+    };
+    getData();
+    getMaterial();
     localStorage.setItem("user", JSON.stringify(state.user));
   }, [state.user]);
 

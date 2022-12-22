@@ -29,9 +29,13 @@ export const updateImport = async (req, res, next) => {
 
 export const deleteImport = async (req, res, next) => {
   try {
-    const updatedImport = await Import.findById(req.params.id);
-    updateImport.isDelete = true;
-    await updateImport.save();
+    const updatedImport = await Import.findByIdAndUpdate(
+      req.params.id,
+      {
+        isDelete: true,
+      },
+      { new: true }
+    );
     res.status(200).json(updatedImport);
   } catch (err) {
     next(err);

@@ -38,9 +38,13 @@ export const deleteFactory = async (req, res, next) => {
   if (checkExport === false)
     return res.status(500).json("Vẫn còn Hóa đơn xuất kho");
   try {
-    const updatedFactory = await Factory.findById(req.params.id);
-    updateFactory.isDelete = true;
-    await updateFactory.save();
+    const updatedFactory = await Factory.findByIdAndUpdate(
+      req.params.id,
+      {
+        isDelete: true,
+      },
+      { new: true }
+    );
     res.status(200).json(updatedFactory);
   } catch (err) {
     next(err);

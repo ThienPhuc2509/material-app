@@ -40,7 +40,7 @@ const Datatable = ({ columns }) => {
     const answer = window.confirm(`Bạn có chắc chắn muốn xóa`);
     if (answer) {
       try {
-        await axios.put(`/${path}/${id}`);
+        await axios.put(`/${path}/delete/${id}`);
         setList(list.filter((item) => item._id !== id));
       } catch (err) {
         console.log(err);

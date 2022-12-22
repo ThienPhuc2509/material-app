@@ -35,9 +35,13 @@ export const deleteMaterial = async (req, res, next) => {
   if (CheckExistingFactory(req.params.id) === true)
     return res.status(500).json("Existing this material in Factoty");
   try {
-    const updatedMaterial = await Material.findById(req.params.id);
-    updateMaterial.isDelete = true;
-    await updateMaterial.save();
+    const updatedMaterial = await Material.findByIdAndUpdate(
+      req.params.id,
+      {
+        isDelete: true,
+      },
+      { new: true }
+    );
     res.status(200).json(updatedMaterial);
   } catch (err) {
     next(err);

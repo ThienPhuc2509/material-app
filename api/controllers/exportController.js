@@ -36,9 +36,10 @@ export const updateExport = async (req, res, next) => {
 
 export const deleteExport = async (req, res, next) => {
   try {
-    const updatedExport = await Export.findById(req.params.id);
-    updateExport.isDelete = true;
-    await updateExport.save();
+    const updatedExport = await Export.findByIdAndUpdate(req.params.id,{
+      isDelele:true,
+    },
+    { new: true });
     res.status(200).json(updatedExport);
   } catch (err) {
     next(err);

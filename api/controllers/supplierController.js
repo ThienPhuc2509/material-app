@@ -30,9 +30,13 @@ export const updateSupplier = async (req, res, next) => {
 };
 export const deleteSupplier = async (req, res, next) => {
   try {
-    const updatedSupplier = await Supplier.findById(req.params.id);
-    updateSupplier.isDelete = true;
-    await updateSupplier.save();
+    const updatedSupplier = await Supplier.findByIdAndUpdate(
+      req.params.id,
+      {
+        isDelete: true,
+      },
+      { new: true }
+    );
     res.status(200).json(updatedSupplier);
   } catch (err) {
     next(err);

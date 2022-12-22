@@ -57,7 +57,7 @@ export const getWarehouse = async (req, res, next) => {
 export const getWarehouses = async (req, res, next) => {
   // const { min, max, ...others } = req.query;
   try {
-    const warehouses = await Warehouse.find();
+    const warehouses = await Warehouse.find({ isDelete: false });
 
     res.status(200).json(warehouses);
   } catch (err) {

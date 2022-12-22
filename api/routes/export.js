@@ -15,7 +15,7 @@ router.post("/", verifyAdmin, createExport);
 //UPDATE
 router.put("/:id", verifyAdmin, updateExport);
 //DELETE
-router.delete("/:id", verifyAdmin, deleteExport);
+router.put("/delete/:id", verifyAdmin, deleteExport);
 //GET
 
 router.get("/find/:id", getExport);

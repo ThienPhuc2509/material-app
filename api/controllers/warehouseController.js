@@ -1,6 +1,8 @@
 import Warehouse from "../models/Warehouse.js";
-import Material from "../models/Material.js";
-
+import {
+  CheckExistingUser,
+  CheckExistingImport,
+} from "../triggers/WarehouseTrigger.js";
 export const createWarehouse = async (req, res, next) => {
   const newWarehouse = new Warehouse(req.body);
 
@@ -26,14 +28,14 @@ export const updateWarehouse = async (req, res, next) => {
   }
 };
 export const deleteWarehouse = async (req, res, next) => {
+  const checkUser = CheckExistingUser(req.body.managerId);
+  if (checkUser === false) return res.status(505).json("Existing user manager");
+  const checkImport = CheckExistingImport(req.body.managerId);
+  if (checkImport === false) return res.status(505).json("Existing import");
   try {
-    const updatedWarehouse = await Warehouse.findByIdAndUpdate(
-      req.params.id,
-      {
-        $set: req.body,
-      },
-      { new: true }
-    );
+    const updatedWarehouse = await Warehouse.findById(req.params.id);
+    updateWarehouse.isDelete = true;
+    await updateWarehouse.save();
     res.status(200).json(updatedWarehouse);
   } catch (err) {
     next(err);

@@ -1,5 +1,5 @@
 import User from "../models/User.js";
-import { GetQuantityImport } from "../triggers/ImportTrigger.js";
+import { CheckManagerExsiting } from "../triggers/UserTrigger.js";
 
 export const updateUser = async (req, res, next) => {
   try {
@@ -16,15 +16,17 @@ export const updateUser = async (req, res, next) => {
   }
 };
 export const deleteUser = async (req, res, next) => {
+  const deleteUser = await User.findById(req.params.id);
+  const check = await CheckManagerExsiting(
+    deleteUser.managerId,
+    deleteUser.role
+  );
+  if (check === false) return res.status(500).json("Existing User task");
   try {
-    const updatedUser = await User.findByIdAndUpdate(
-      req.params.id,
-      {
-        $set: req.body,
-      },
-      { new: true }
-    );
-    res.status(200).json(updatedUser);
+    deleteUser.isDelete = true;
+    await deleteUser.save();
+
+    res.status(200).json(deleteUser);
   } catch (err) {
     next(err);
   }

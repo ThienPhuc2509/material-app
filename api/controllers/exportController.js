@@ -1,11 +1,14 @@
 import Export from "../models/Export.js";
-import Material from "../models/Material.js";
-import User from "../models/User.js";
-import Factory from "../models/Factory.js";
+import {
+  DecreaseQuantity,
+  UpdatedMaterialFactory,
+} from "../triggers/ExportTrigger.js";
 
 export const createExport = async (req, res, next) => {
   const newExport = new Export(req.body);
   try {
+    await DecreaseQuantity(req.body.materials);
+    await UpdatedMaterialFactory(req.body.factoryId, req.body.materials);
     const savedExport = await newExport.save();
     res.status(200).json(savedExport);
   } catch (err) {
@@ -13,21 +16,18 @@ export const createExport = async (req, res, next) => {
   }
 };
 
-// trường hợp lúc đầu a => -3 => -5 => 3-5 =-2 | -5 => -3 => 5 -
-
 export const updateExport = async (req, res, next) => {
   try {
-    const updatedExport = await Export.findByIdAndUpdate(req.params.id, {
-      isDelete: true,
-    });
-    updatedExport.materials.forEach(async (i) => {
-      const updatedMaterial = await Material.findById(i.materialId);
-      updatedMaterial.quantity =
-        updatedMaterial.quantity >= i.quantity
-          ? updatedMaterial.quantity - i.quantity
-          : 0;
-      await updatedMaterial.save();
-    });
+    await DecreaseQuantity(req.body.materials);
+    await UpdatedMaterialFactory(req.body.factoryId, req.body.materials);
+    const updatedExport = await Export.findByIdAndUpdate(
+      req.params.id,
+      {
+        $set: req.body,
+      },
+      { new: true }
+    );
+
     res.status(200).json(updatedExport);
   } catch (err) {
     next(err);
@@ -36,8 +36,15 @@ export const updateExport = async (req, res, next) => {
 
 export const deleteExport = async (req, res, next) => {
   try {
-    await Export.findByIdAndDelete(req.params.id);
-    res.status(200).json("Export has been deleted.");
+    const updatedExport = await Export.findByIdAndUpdate(
+      req.params.id,
+      {
+        $set: req.body,
+      },
+      { new: true }
+    );
+
+    res.status(200).json(updatedExport);
   } catch (err) {
     next(err);
   }

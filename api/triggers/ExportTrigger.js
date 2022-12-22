@@ -6,8 +6,8 @@ import Factory from "../models/Factory.js";
 export const GetQuantityExport = async (userId) => {
   
   if (!userId) return false;
-  const quantityUser = Export.where({ userId }).countDocuments();
-  if (quantityUser === 0) return true
+  const quantityExport = Export.where({ userId }).countDocuments();
+  if (quantityExport === 0) return true
   else return false
 };
 
@@ -23,7 +23,7 @@ export const DecreaseQuantity = async (materials) => {
   });
 };
 
-// trigger cập nhập số lượng vật liệu cho Phân xưởng khi xuất khoa
+// trigger cập nhập số lượng vật liệu cho Phân xưởng khi xuất kho
 export const UpdatedMaterialFactory = async (factoryId, materials) => {
   await Factory.findByIdAndUpdate(factoryId, {
     $push: {

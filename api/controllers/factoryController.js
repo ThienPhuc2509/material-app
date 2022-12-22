@@ -1,6 +1,9 @@
 import Factory from "../models/Factory.js";
 import { createError } from "../utils/error.js";
-import { CheckExistingUser } from "../triggers/FactoryTrigger.js";
+import {
+  CheckExistingUser,
+  CheckExistingExport,
+} from "../triggers/FactoryTrigger.js";
 
 export const createFactory = async (req, res, next) => {
   const newFactory = new Factory(req.body);
@@ -28,9 +31,12 @@ export const updateFactory = async (req, res, next) => {
   }
 };
 export const deleteFactory = async (req, res, next) => {
-  const check = await CheckExistingUser(req.params.id);
-  if (check === false)
-    return res.status(500).json("Vẫn còn quản lý đang quản lý kho");
+  const checkUser = await CheckExistingUser(req.params.id);
+  if (checkUser === false)
+    return res.status(500).json("Vẫn còn Nhân viên đang quản lý kho");
+  const checkExport = await CheckExistingExport(req.params.id)
+  if (checkExport === false)
+    return res.status(500).json("Vẫn còn Hóa đơn xuất kho");
   try {
     const updatedFactory = await Factory.findByIdAndUpdate(
       req.params.id,

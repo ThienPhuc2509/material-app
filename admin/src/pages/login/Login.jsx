@@ -17,7 +17,7 @@ const theme = createTheme();
 
 const Login = () => {
   const [credentials, setCredentials] = useState({
-    username: undefined,
+    email: undefined,
     password: undefined,
   });
 
@@ -77,7 +77,7 @@ const Login = () => {
               margin="normal"
               required
               fullWidth
-              id="username"
+              id="email"
               label="Tài khoản"
               name="email"
               autoComplete="email"

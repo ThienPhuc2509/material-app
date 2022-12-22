@@ -31,6 +31,23 @@ export default function EditUser({ title }) {
   const changeManagerId = (event) => {
     setManagerId(event.target.value);
   };
+
+  const navigate = useNavigate();
+  const setData = () => {
+    setUsername(JSON.parse(localStorage.getItem("editUser")).username);
+    setcountry(JSON.parse(localStorage.getItem("editUser")).country);
+    setphone(JSON.parse(localStorage.getItem("editUser")).phone);
+    setEmail(JSON.parse(localStorage.getItem("editUser")).email);
+    setRole(JSON.parse(localStorage.getItem("editUser")).role);
+    setManagerId(JSON.parse(localStorage.getItem("editUser")));
+    // setY(JSON.parse(localStorage.getItem("editUser")));
+  };
+  useEffect(() => {
+    if (localStorage.getItem("editUser")) {
+      setData();
+    }
+  }, []);
+
   useEffect(() => {
     const Warehouse = async () => {
       const dataWarehouse = await axios.get("/warehouses/");
@@ -45,30 +62,12 @@ export default function EditUser({ title }) {
     console.log(role);
   }, [role]);
   const WarehouseList = () => {
-    const w = x.map((i) => <MenuItem value={i._id}>{i.name}</MenuItem>);
-    console.log(w);
-    return w;
+    return x.map((i) => <MenuItem value={i._id}>{i.name}</MenuItem>);
   };
   const FatoryList = () => {
     console.log(y);
     return y.map((i) => <MenuItem value={i._id}>{i.name}</MenuItem>);
   };
-
-  const navigate = useNavigate();
-  const setData = () => {
-    setUsername(JSON.parse(localStorage.getItem("editUser")).username);
-    setcountry(JSON.parse(localStorage.getItem("editUser")).country);
-    setphone(JSON.parse(localStorage.getItem("editUser")).phone);
-    setEmail(JSON.parse(localStorage.getItem("editUser")).email);
-    setRole(JSON.parse(localStorage.getItem("editUser")).role);
-    setX(JSON.parse(localStorage.getItem("editRole")));
-    // setY(JSON.parse(localStorage.getItem("editUser")));
-  };
-  useEffect(() => {
-    if (localStorage.getItem("editUser")) {
-      setData();
-    }
-  }, []);
   const emailNu = JSON.parse(localStorage.getItem("editUser")).email;
 
   const handleClick = async (e) => {
@@ -91,7 +90,7 @@ export default function EditUser({ title }) {
       try {
         const id = JSON.parse(localStorage.getItem("editUser"))._id;
         await axios.put(`/users/${id}`, user);
-        navigate("/users");
+        // navigate("/users");
       } catch (err) {
         console.log(err);
       }

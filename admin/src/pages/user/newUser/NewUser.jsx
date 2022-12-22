@@ -27,6 +27,8 @@ const New = ({ title }) => {
   const confirmPassword = useRef();
   const [role, setRole] = useState(0);
   const [x, setX] = useState([]);
+  localStorage.setItem("editRole", JSON.stringify(x));
+
   const [y, setY] = useState([]);
   const [managerId, setManagerId] = useState("");
   const changeRole = (event) => {
@@ -50,9 +52,7 @@ const New = ({ title }) => {
     console.log(role);
   }, [role]);
   const WarehouseList = () => {
-    const w = x.map((i) => <MenuItem value={i._id}>{i.name}</MenuItem>);
-    console.log(w);
-    return w;
+    return x.map((i) => <MenuItem value={i._id}>{i.name}</MenuItem>);
   };
 
   const FatoryList = () => {

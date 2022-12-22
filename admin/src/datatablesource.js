@@ -1,3 +1,5 @@
+import moment from "moment";
+import vi from "moment/locale/vi";
 export const userColumns = [
   // { field: "_id", headerName: "ID", width: 70 },
   {
@@ -158,7 +160,7 @@ export const factoryColumns = [
         {params.value.map((role, index) => (
           <div key={index}>
             <li style={{ listStyle: "none" }}>
-              <b>Tên:</b> {role._id}
+              <b>Tên:</b> {role.materialId}
             </li>
             <li style={{ listStyle: "none" }}>
               <b>Số lượng:</b> {role.quantity}
@@ -214,6 +216,13 @@ export const importColumns = [
       </ul>
     ),
   },
+  {
+    field: "createdAt",
+    headerName: "Ngày nhập",
+    width: 280,
+    valueGetter: (params) =>
+      moment(params.value).locale("vi", vi).format("dddd, LLL"),
+  },
   // {
   //   field: material.toString(),
   //   headerName: "Vật liệu",
@@ -251,5 +260,12 @@ export const exportColumns = [
         ))}
       </ul>
     ),
+  },
+  {
+    field: "createdAt",
+    headerName: "Ngày xuất",
+    width: 280,
+    valueGetter: (params) =>
+      moment(params.value).locale("vi", vi).format("dddd, LLL"),
   },
 ];

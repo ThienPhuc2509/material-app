@@ -32,6 +32,9 @@ const New = ({ title }) => {
   const changeRole = (event) => {
     setRole(event.target.value);
   };
+  const changeManagerId = (event) => {
+    setManagerId(event.target.value);
+  };
 
   useEffect(() => {
     const Warehouse = async () => {
@@ -168,7 +171,7 @@ const New = ({ title }) => {
                       id="demo-simple-select"
                       value={managerId}
                       label="Phân quyền"
-                      onChange={changeRole}
+                      onChange={changeManagerId}
                     >
                       {role === 3 && WarehouseList()}
                       {role === 5 && FatoryList()}

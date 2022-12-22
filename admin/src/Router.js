@@ -2,6 +2,7 @@ import React from "react";
 import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
 import List from "./pages/list/List";
+import ListArray from "./pages/listArray/ListArray";
 
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useContext } from "react";
@@ -171,7 +172,7 @@ const Router = () => {
             index
             element={
               <ProtectedRoute>
-                <List columns={factoryColumns} />
+                <ListArray columns={factoryColumns} />
               </ProtectedRoute>
             }
           />
@@ -233,7 +234,7 @@ const Router = () => {
             index
             element={
               <ProtectedRoute>
-                <List columns={importColumns} />
+                <ListArray columns={importColumns} />
               </ProtectedRoute>
             }
           />
@@ -259,7 +260,7 @@ const Router = () => {
             index
             element={
               <ProtectedRoute>
-                <List columns={exportColumns} />
+                <ListArray columns={exportColumns} />
               </ProtectedRoute>
             }
           />

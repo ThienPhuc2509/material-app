@@ -4,8 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import useFetch from "../../hooks/useFetch";
 import axios from "axios";
-
-const Datatable = ({ columns }) => {
+export default function DatatableArray({ columns }) {
   const location = useLocation();
   const path = location.pathname.split("/")[1];
   const [list, setList] = useState([]);
@@ -16,16 +15,8 @@ const Datatable = ({ columns }) => {
   }, [data]);
   function pathswitch({ path }) {
     switch (path) {
-      case "users":
-        return <div>Người dùng</div>;
-      case "warehouses":
-        return <div>Kho</div>;
       case "factories":
         return <div>Phân xưởng</div>;
-      case "materials":
-        return <div>Vật liệu</div>;
-      case "suppliers":
-        return <div>Nhà cung cấp</div>;
       case "imports":
         return <div>Nhập kho</div>;
       case "exports":
@@ -34,7 +25,6 @@ const Datatable = ({ columns }) => {
         return null;
     }
   }
-
   const handleDelete = async (id) => {
     const answer = window.confirm(`Bạn có chắc chắn muốn xóa`);
     if (answer) {
@@ -46,7 +36,6 @@ const Datatable = ({ columns }) => {
       }
     }
   };
-
   const actionColumn = [
     {
       field: "action",
@@ -72,7 +61,6 @@ const Datatable = ({ columns }) => {
       },
     },
   ];
-
   return (
     <div className="datatable">
       <div className="datatableTitle">
@@ -95,6 +83,4 @@ const Datatable = ({ columns }) => {
       />
     </div>
   );
-};
-
-export default Datatable;
+}

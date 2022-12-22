@@ -12,11 +12,11 @@ export const GetQuantityExport = async (userId) => {
 
 // trigger giảm số lượng vật liệu khi xuất kho
 export const DecreaseQuantity = async (materials) => {
-  materials.forEach(async (i) => {
+  materials.map(async (i) => {
     const updatedMaterial = await Material.findById(i.materialId);
     updatedMaterial.quantity =
       updatedMaterial.quantity >= i.quantity
-        ? updatedMaterial.quantity - i.quantity
+        ? updatedMaterial.quantity - parseInt(i.quantity)
         : 0;
     await updatedMaterial.save();
   });

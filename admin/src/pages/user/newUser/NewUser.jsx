@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "./new.scss";
 import Sidebar from "../../../components/sidebar/Sidebar";
 import Navbar from "../../../components/navbar/Navbar";
@@ -25,9 +25,34 @@ const New = ({ title }) => {
   const email = useRef();
   const password = useRef();
   const confirmPassword = useRef();
-  const [role, setRole] = useState("");
+  const [role, setRole] = useState(0);
+  const [x, setX] = useState([]);
+  const [y, setY] = useState([]);
+  const [managerId, setManagerId] = useState("");
   const changeRole = (event) => {
     setRole(event.target.value);
+  };
+
+  useEffect(() => {
+    const Warehouse = async () => {
+      const dataWarehouse = await axios.get("/warehouses/");
+      setX(dataWarehouse.data);
+    };
+    const Factory = async () => {
+      const dataFactory = await axios.get("/factories/");
+      setY(dataFactory.data);
+    };
+    Warehouse();
+    Factory();
+    console.log(role);
+  }, [role]);
+  const WarehouseList = () => {
+    console.log(x);
+    return x.map((i) => <MenuItem value={i._id}>{i.name}</MenuItem>);
+  };
+  const FatoryList = () => {
+    console.log(y);
+    return y.map((i) => <MenuItem value={i._id}>{i.name}</MenuItem>);
   };
   const navigate = useNavigate();
   const [values, setValues] = useState({ password: "", showPassword: false });
@@ -126,13 +151,30 @@ const New = ({ title }) => {
                     label="Phân quyền"
                     onChange={changeRole}
                   >
-                    <MenuItem value={"1"}>Nhân viên</MenuItem>
-                    <MenuItem value={"2"}>Quản lý tất cả các kho</MenuItem>
-                    <MenuItem value={"3"}>Chỉ định kho</MenuItem>
-                    <MenuItem value={"4"}>Quản lý tất cả phân xưởng</MenuItem>
-                    <MenuItem value={"5"}>Chỉ định phân xưởng </MenuItem>
+                    <MenuItem value={1}>Nhân viên</MenuItem>
+                    <MenuItem value={2}>Quản lý tất cả các kho</MenuItem>
+                    <MenuItem value={3}>Chỉ định kho</MenuItem>
+                    <MenuItem value={4}>Quản lý tất cả phân xưởng</MenuItem>
+                    <MenuItem value={5}>Chỉ định phân xưởng </MenuItem>
                   </Select>
                 </FormControl>
+                {(role == 3 || role == 5) && (
+                  <FormControl sx={{ m: 1, width: "50ch" }}>
+                    <InputLabel id="demo-simple-select-label">
+                      Phân quyền
+                    </InputLabel>
+                    <Select
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
+                      value={managerId}
+                      label="Phân quyền"
+                      onChange={changeRole}
+                    >
+                      {role === 3 && WarehouseList()}
+                      {role === 5 && FatoryList()}
+                    </Select>
+                  </FormControl>
+                )}
                 <Typography variant="p" component="h2" sx={{ mt: 2 }}>
                   Bảo mật
                 </Typography>

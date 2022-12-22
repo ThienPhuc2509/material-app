@@ -1,56 +1,206 @@
+import React, { useState, useRef } from "react";
 import "./new.scss";
 import Sidebar from "../../../components/sidebar/Sidebar";
 import Navbar from "../../../components/navbar/Navbar";
-import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
-import { useState } from "react";
 import axios from "axios";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import InputLabel from "@mui/material/InputLabel";
+import FormControl from "@mui/material/FormControl";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import IconButton from "@mui/material/IconButton";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import InputAdornment from "@mui/material/InputAdornment";
+import { useNavigate } from "react-router-dom";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
 
-const New = ({ inputs, title }) => {
-  const [info, setInfo] = useState({});
-
-  const handleChange = (e) => {
-    setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+const New = ({ title }) => {
+  const username = useRef();
+  const country = useRef();
+  const phone = useRef();
+  const email = useRef();
+  const password = useRef();
+  const confirmPassword = useRef();
+  const [role, setRole] = useState("");
+  const changeRole = (event) => {
+    setRole(event.target.value);
+  };
+  const navigate = useNavigate();
+  const [values, setValues] = useState({ password: "", showPassword: false });
+  const handleChange = (prop) => (event) => {
+    setValues({ ...values, [prop]: event.target.value });
   };
 
+  const handleClickShowPassword = () => {
+    setValues({
+      ...values,
+      showPassword: !values.showPassword,
+    });
+  };
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
   const handleClick = async (e) => {
     e.preventDefault();
-    try {
-      const newUser = {
-        ...info,
+    if (confirmPassword.current.value !== password.current.value) {
+      confirmPassword.current.setCustomValidity("Mật khẩu không khớp");
+    } else {
+      const user = {
+        username: username.current.value,
+        email: email.current.value,
+        password: password.current.value,
+        country: country.current.value,
+        phone: phone.current.value,
+        role: role ? role : [],
       };
-
-      await axios.post("/auth/register", newUser);
-    } catch (err) {
-      console.log(err);
+      try {
+        await axios.post(`/auth/register`, user);
+        navigate("/users");
+      } catch (err) {
+        console.log(err);
+      }
     }
   };
-
-  console.log(info);
   return (
     <div className="new">
       <Sidebar />
       <div className="newContainer">
         <Navbar />
         <div className="top">
-          <h1>{title}</h1>
+          <h1 style={{ color: "black", fontSize: "20px" }}>{title}</h1>
         </div>
         <div className="bottom">
-          <div className="left"></div>
           <div className="right">
-            <form>
-              {inputs.map((input) => (
-                <div className="formInput" key={input.id}>
-                  <label>{input.label}</label>
-                  <input
-                    onChange={handleChange}
-                    type={input.type}
-                    placeholder={input.placeholder}
-                    id={input.id}
+            <Box
+              component="form"
+              sx={{
+                "& .MuiTextField-root": { m: 1, width: "50ch" },
+              }}
+              autoComplete="off"
+              onSubmit={handleClick}
+            >
+              <div>
+                <div>
+                  <Typography variant="p" component="h2">
+                    Thông tin cá nhân
+                  </Typography>
+
+                  <TextField
+                    required
+                    id="outlined-username"
+                    label="Tên nhân viên"
+                    inputRef={username}
+                  />
+                  <TextField
+                    required
+                    id="outlined-phone"
+                    label="Số điện thoại"
+                    inputRef={phone}
+                  />
+                  <TextField
+                    required
+                    id="outlined-country"
+                    label="Địa chỉ"
+                    inputRef={country}
+                  />
+
+                  <TextField
+                    required
+                    id="outlined-email"
+                    label="Email"
+                    inputRef={email}
                   />
                 </div>
-              ))}
-              <button onClick={handleClick}>Send</button>
-            </form>
+                <FormControl sx={{ m: 1, width: "50ch" }}>
+                  <InputLabel id="demo-simple-select-label">
+                    Phân quyền
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={role}
+                    label="Phân quyền"
+                    onChange={changeRole}
+                  >
+                    <MenuItem value={"1"}>Nhân viên</MenuItem>
+                    <MenuItem value={"2"}>Quản lý tất cả các kho</MenuItem>
+                    <MenuItem value={"3"}>Chỉ định kho</MenuItem>
+                    <MenuItem value={"4"}>Quản lý tất cả phân xưởng</MenuItem>
+                    <MenuItem value={"5"}>Chỉ định phân xưởng </MenuItem>
+                  </Select>
+                </FormControl>
+                <Typography variant="p" component="h2" sx={{ mt: 2 }}>
+                  Bảo mật
+                </Typography>
+                <FormControl sx={{ m: 1, width: "50ch" }} variant="outlined">
+                  <InputLabel htmlFor="outlined-adornment-password" required>
+                    Mật khẩu
+                  </InputLabel>
+                  <OutlinedInput
+                    id="outlined-adornment-password"
+                    type={values.showPassword ? "text" : "password"}
+                    value={values.password}
+                    inputRef={password}
+                    onChange={handleChange("password")}
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowPassword}
+                          onMouseDown={handleMouseDownPassword}
+                          edge="end"
+                        >
+                          {values.showPassword ? (
+                            <VisibilityOff />
+                          ) : (
+                            <Visibility />
+                          )}
+                        </IconButton>
+                      </InputAdornment>
+                    }
+                    label="Password"
+                  />
+                </FormControl>
+                <FormControl sx={{ m: 1, width: "50ch" }} variant="outlined">
+                  <InputLabel htmlFor="outlined-confirm-password" required>
+                    Xác nhận mật khẩu
+                  </InputLabel>
+                  <OutlinedInput
+                    id="outlined-confirm-password"
+                    type={values.showPasswords ? "text" : "password"}
+                    value={values.passwords}
+                    onChange={handleChange("passwords")}
+                    inputRef={confirmPassword}
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowPassword}
+                          onMouseDown={handleMouseDownPassword}
+                          edge="end"
+                        >
+                          {values.showPasswords ? (
+                            <VisibilityOff />
+                          ) : (
+                            <Visibility />
+                          )}
+                        </IconButton>
+                      </InputAdornment>
+                    }
+                    label="Confirm Password"
+                  />
+                </FormControl>
+              </div>
+              <Button variant="contained" color="success" type="submit">
+                Đồng ý
+              </Button>
+
+              <Button variant="contained">Đặt lại</Button>
+            </Box>
           </div>
         </div>
       </div>

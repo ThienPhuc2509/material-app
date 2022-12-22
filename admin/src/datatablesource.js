@@ -34,9 +34,44 @@ export const userColumns = [
     width: 100,
   },
   {
-    field: "isAdmin",
+    field: "role",
     headerName: "Phân quyền",
     width: 100,
+    renderCell: (params) => {
+      if (params.row.role === 0) {
+        return <div style={{ color: "red", fontWeight: "bold" }}>Admin</div>;
+      } else if (params.row.role === 1) {
+        return (
+          <div style={{ color: "green", fontWeight: "bold" }}>Nhân viên</div>
+        );
+      } else if (params.row.role === 2) {
+        return (
+          <div style={{ color: "green", fontWeight: "bold" }}>
+            Quản lý tất cả kho
+          </div>
+        );
+      } else if (params.row.role === 3) {
+        return (
+          <div style={{ color: "green", fontWeight: "bold" }}>Chỉ định kho</div>
+        );
+      } else if (params.row.role === 5) {
+        return (
+          <div style={{ color: "green", fontWeight: "bold" }}>
+            Quản lý tất cả phân xưởng
+          </div>
+        );
+      } else if (params.row.role === 5) {
+        return (
+          <div style={{ color: "green", fontWeight: "bold" }}>
+            Chỉ định phân xưởng
+          </div>
+        );
+      } else {
+        return (
+          <div style={{ color: "orange", fontWeight: "bold" }}>Khách hàng</div>
+        );
+      }
+    },
   },
 ];
 
@@ -117,7 +152,21 @@ export const factoryColumns = [
   {
     field: "materials",
     headerName: "Vật liệu",
-    width: 200,
+    width: 260,
+    renderCell: (params) => (
+      <ul style={{ padding: "0px" }}>
+        {params.value.map((role, index) => (
+          <div key={index}>
+            <li style={{ listStyle: "none" }}>
+              <b>Tên:</b> {role._id}
+            </li>
+            <li style={{ listStyle: "none" }}>
+              <b>Số lượng:</b> {role.quantity}
+            </li>
+          </div>
+        ))}
+      </ul>
+    ),
   },
 ];
 
@@ -145,45 +194,17 @@ export const supplierColumns = [
   },
 ];
 export const importColumns = [
-  // { field: "_id", headerName: "ID", width: 70 },
-  {
-    field: "name",
-    headerName: "Vật liệu",
-    width: 230,
-  },
-  {
-    field: "email",
-    headerName: "Đơn vị",
-    width: 100,
-  },
-  {
-    field: "address",
-    headerName: "Số lượng",
-    width: 100,
-  },
-  {
-    field: "total",
-    headerName: "Tổng tiền",
-    width: 100,
-  },
-  {
-    field: "phone",
-    headerName: "Nhà cung cấp",
-    width: 100,
-  },
-];
-export const exportColumns = [
-  // { field: "_id", headerName: "ID", width: 70 },
+  { field: "_id", headerName: "Mã phiếu nhập kho", width: 230 },
   {
     field: "materials",
     headerName: "Vật liệu",
-    width: 230,
+    width: 260,
     renderCell: (params) => (
-      <ul>
+      <ul style={{ padding: "0px" }}>
         {params.value.map((role, index) => (
           <div key={index}>
             <li style={{ listStyle: "none" }}>
-              <b>Tên:</b> {role.name}
+              <b>Tên:</b> {role._id}
             </li>
             <li style={{ listStyle: "none" }}>
               <b>Số lượng:</b> {role.quantity}
@@ -193,24 +214,42 @@ export const exportColumns = [
       </ul>
     ),
   },
+  // {
+  //   field: material.toString(),
+  //   headerName: "Vật liệu",
+  //   width: 230,
+  //   renderCell: (params) => (
+  //     <ul style={{ padding: "0px" }}>
+  //       {params.value.map((role, index) => (
+  //         <div key={index}>
+  //           <li style={{ listStyle: "none" }}>
+  //             <b>Số lượng:</b> {role.quantity}
+  //           </li>
+  //         </div>
+  //       ))}
+  //     </ul>
+  //   ),
+  // },
+];
+export const exportColumns = [
+  { field: "_id", headerName: "Mã phiếu xuất kho", width: 230 },
   {
-    field: "email",
-    headerName: "Đơn vị",
-    width: 100,
-  },
-  {
-    field: "address",
-    headerName: "Số lượng",
-    width: 100,
-  },
-  {
-    field: "total",
-    headerName: "Tổng tiền",
-    width: 100,
-  },
-  {
-    field: "phone",
-    headerName: "Phân xưởng",
-    width: 100,
+    field: "materials",
+    headerName: "Vật liệu",
+    width: 260,
+    renderCell: (params) => (
+      <ul style={{ padding: "0px" }}>
+        {params.value.map((role, index) => (
+          <div key={index}>
+            <li style={{ listStyle: "none" }}>
+              <b>Tên:</b> {role._id}
+            </li>
+            <li style={{ listStyle: "none" }}>
+              <b>Số lượng:</b> {role.quantity}
+            </li>
+          </div>
+        ))}
+      </ul>
+    ),
   },
 ];

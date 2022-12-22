@@ -4,7 +4,6 @@ import Login from "./pages/login/Login";
 import List from "./pages/list/List";
 
 import { Routes, Route, Navigate } from "react-router-dom";
-import { productInputs, userInputs } from "./formSource";
 import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
 import {
@@ -86,7 +85,7 @@ const Router = () => {
             path="new"
             element={
               <ProtectedRoute>
-                <NewUser inputs={userInputs} title="Thêm người dùng" />
+                <NewUser title="Thêm người dùng" />
               </ProtectedRoute>
             }
           />

@@ -34,17 +34,13 @@ export const deleteFactory = async (req, res, next) => {
   const checkUser = await CheckExistingUser(req.params.id);
   if (checkUser === false)
     return res.status(500).json("Vẫn còn Nhân viên đang quản lý kho");
-  const checkExport = await CheckExistingExport(req.params.id)
+  const checkExport = await CheckExistingExport(req.params.id);
   if (checkExport === false)
     return res.status(500).json("Vẫn còn Hóa đơn xuất kho");
   try {
-    const updatedFactory = await Factory.findByIdAndUpdate(
-      req.params.id,
-      {
-        $set: req.body,
-      },
-      { new: true }
-    );
+    const updatedFactory = await Factory.findById(req.params.id);
+    updateFactory.isDelete = true;
+    await updateFactory.save();
     res.status(200).json(updatedFactory);
   } catch (err) {
     next(err);

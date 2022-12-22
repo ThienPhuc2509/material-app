@@ -1,8 +1,5 @@
 import Import from "../models/Import.js";
-import {
-  GetQuantityImport,
-  IncreaseQuantity,
-} from "../triggers/ImportTrigger.js";
+import { IncreaseQuantity } from "../triggers/ImportTrigger.js";
 export const createImport = async (req, res, next) => {
   const newImport = new Import(req.body);
   await IncreaseQuantity(req.body);
@@ -32,13 +29,9 @@ export const updateImport = async (req, res, next) => {
 
 export const deleteImport = async (req, res, next) => {
   try {
-    const updatedImport = await Import.findByIdAndUpdate(
-      req.params.id,
-      {
-        $set: req.body,
-      },
-      { new: true }
-    );
+    const updatedImport = await Import.findById(req.params.id);
+    updateImport.isDelete = true;
+    await updateImport.save();
     res.status(200).json(updatedImport);
   } catch (err) {
     next(err);

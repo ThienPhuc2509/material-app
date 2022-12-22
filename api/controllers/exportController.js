@@ -36,14 +36,9 @@ export const updateExport = async (req, res, next) => {
 
 export const deleteExport = async (req, res, next) => {
   try {
-    const updatedExport = await Export.findByIdAndUpdate(
-      req.params.id,
-      {
-        $set: req.body,
-      },
-      { new: true }
-    );
-
+    const updatedExport = await Export.findById(req.params.id);
+    updateExport.isDelete = true;
+    await updateExport.save();
     res.status(200).json(updatedExport);
   } catch (err) {
     next(err);

@@ -1,12 +1,11 @@
-import Import from "../models/Import.js";
+import User from "../models/User.js";
 import Material from "../models/Material.js";
-
 
 //trigger lấy số lượng Hóa đơn nhập mà Nhân viên đã thực hiện - userId
 export const GetQuantityImport = async (userId) => {
   if (!userId) return false;
-  const quantityImport = await Import.find({ userId });
-  if (quantityImport.length === 0) return true;
+  const ExsitingUser = await User.find({ _id: userId, isDelete: false });
+  if (ExsitingUser.length === 0) return true;
   else return false;
 };
 

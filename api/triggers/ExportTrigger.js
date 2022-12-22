@@ -1,14 +1,13 @@
 import Material from "../models/Material.js";
-import Export from "../models/Material.js";
+import User from "../models/User.js";
 import Factory from "../models/Factory.js";
 
-// trigger lấy số lượng Hóa đơn xuất mà Nhân viên đã thực hiện khi xóa Hóa đơn xuất - userId
+// trigger kiểm tra nhân viên xuất háo đơn có tồn tại hay không khi xóa hóa đơn - userId
 export const GetQuantityExport = async (userId) => {
-  
   if (!userId) return false;
-  const quantityExport = Export.where({ userId }).countDocuments();
-  if (quantityExport === 0) return true
-  else return false
+  const existingUser = await User.find({ _id: userId, isDelete: false });
+  if (existingUser === 0) return true;
+  else return false;
 };
 
 // trigger giảm số lượng vật liệu khi xuất kho

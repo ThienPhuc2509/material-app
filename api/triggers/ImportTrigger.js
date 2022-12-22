@@ -11,7 +11,7 @@ export const GetQuantityImport = async (userId) => {
 
 // trigger tăng số lượng vật liệu khi nhập kho
 export const IncreaseQuantity = async (materials) => {
-  materials.forEach(async (i) => {
+  materials.map(async (i) => {
     const updatedMaterial = await Material.findById(i.materialId);
     updatedMaterial.quantity = updatedMaterial.quantity + i.quantity;
     await updatedMaterial.save();

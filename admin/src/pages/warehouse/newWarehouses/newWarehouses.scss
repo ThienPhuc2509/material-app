@@ -40,10 +40,10 @@
           gap: 30px;
           justify-content: space-between;
 
-          .selectRooms{
+          .selectRooms {
             width: 100%;
 
-            select{
+            select {
               width: 100%;
               padding: 10px;
             }
@@ -70,16 +70,16 @@
             }
           }
 
-          button {
-            width: 150px;
-            padding: 10px;
-            border: none;
-            background-color: teal;
-            color: white;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 10px;
-          }
+          // button {
+          //   width: 150px;
+          //   padding: 10px;
+          //   border: none;
+          //   background-color: blue;
+          //   color: white;
+          //   font-weight: bold;
+          //   cursor: pointer;
+          //   margin-top: 10px;
+          // }
         }
       }
     }

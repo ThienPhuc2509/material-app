@@ -29,6 +29,7 @@ const UserSchema = new mongoose.Schema(
       default: 0,
       required: true,
     },
+    // 0: admin, 1: nhanvien, 2: kho all, 3: kho id, 4: phan xuong all, 5: phan xuong id
     managerId: {
       type: String,
       default: "",

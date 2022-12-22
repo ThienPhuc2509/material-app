@@ -1,11 +1,6 @@
 import mongoose from "mongoose";
 const ImportSchema = new mongoose.Schema({
   userId: { type: String, required: true },
-  warehousesId: {
-    type: String,
-    default: "",
-    required: true,
-  },
   materials: [
     {
       materialId: { type: String },

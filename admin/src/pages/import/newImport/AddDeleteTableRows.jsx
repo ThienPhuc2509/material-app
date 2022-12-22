@@ -17,7 +17,7 @@ export default function AddDeleteTableRows() {
   const addTableRows = () => {
     const rowsInput = {
       materialId: "",
-      quantity: "",
+      quantity: 0,
     };
     setRowsData([...rowsData, rowsInput]);
     localStorage.setItem(

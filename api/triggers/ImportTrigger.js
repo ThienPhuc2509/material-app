@@ -13,7 +13,9 @@ export const GetQuantityImport = async (userId) => {
 export const IncreaseQuantity = async (materials) => {
   materials.map(async (i) => {
     const updatedMaterial = await Material.findById(i.materialId);
-    updatedMaterial.quantity = updatedMaterial.quantity + i.quantity;
-    await updatedMaterial.save();
+    console.log(typeof i.quantity);
+    updatedMaterial.quantity += parseInt(i.quantity);
+    console.log(updatedMaterial.quantity);
+    updatedMaterial.save();
   });
 };

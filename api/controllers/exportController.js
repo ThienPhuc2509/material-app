@@ -7,7 +7,8 @@ import {
 export const createExport = async (req, res, next) => {
   const newExport = new Export(req.body);
   try {
-    await DecreaseQuantity(req.body.materials);
+    const check = await DecreaseQuantity(req.body.materials);
+    if(check===false) return  res.status(500).json("error");
     await UpdatedMaterialFactory(req.body.factoryId, req.body.materials);
     const savedExport = await newExport.save();
     res.status(200).json(savedExport);

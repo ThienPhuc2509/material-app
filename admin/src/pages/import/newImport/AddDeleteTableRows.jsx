@@ -27,7 +27,7 @@ export default function AddDeleteTableRows() {
   };
   const deleteTableRows = (index) => {
     const rows = [...rowsData];
-    rows.splice(index, 1);
+      rows.splice(index, 1);
     setRowsData(rows);
     localStorage.setItem("iprmaterial", JSON.stringify(rows));
   };

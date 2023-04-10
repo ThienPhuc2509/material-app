@@ -1,6 +1,5 @@
 import Supplier from "../models/Supplier.js";
-import Material from "../models/Material.js";
-import { createError } from "../utils/error.js";
+
 
 export const createSupplier = async (req, res, next) => {
   const newSupplier = new Supplier(req.body);

@@ -15,11 +15,12 @@ export const DecreaseQuantity = async (materials) => {
   materials.map(async (i) => {
     const updatedMaterial = await Material.findById(i.materialId);
     updatedMaterial.quantity =
-      updatedMaterial.quantity >= i.quantity
-        ? updatedMaterial.quantity - parseInt(i.quantity)
-        : 0;
+      updatedMaterial.quantity >= i.quantity &&
+      updatedMaterial.quantity - parseInt(i.quantity);
+    if (updatedMaterial.quantity < i.quantity) return false;
     await updatedMaterial.save();
   });
+  return false;
 };
 
 // trigger cập nhập số lượng vật liệu cho Phân xưởng khi xuất kho

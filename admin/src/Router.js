@@ -247,14 +247,7 @@ const Router = () => {
               </ProtectedRoute>
             }
           />
-          <Route
-            path=":importId"
-            element={
-              <ProtectedRoute>
-                <DetailImport />
-              </ProtectedRoute>
-            }
-          />
+          <Route path=":importId" element={<ProtectedRoute></ProtectedRoute>} />
           <Route
             path="new"
             element={
@@ -273,14 +266,7 @@ const Router = () => {
               </ProtectedRoute>
             }
           />
-          <Route
-            path=":exportId"
-            element={
-              <ProtectedRoute>
-                <DetailExport />
-              </ProtectedRoute>
-            }
-          />
+          <Route path=":exportId" element={<ProtectedRoute></ProtectedRoute>} />
           <Route
             path="new"
             element={

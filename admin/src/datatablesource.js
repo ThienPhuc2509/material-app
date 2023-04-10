@@ -74,6 +74,9 @@ export const userColumns = [
         );
       }
     },
+    // renderCell: (params) => {
+    //   console.log(params);
+    // },
   },
 ];
 

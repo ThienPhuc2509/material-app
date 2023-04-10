@@ -6,11 +6,18 @@ import useFetch from "../../hooks/useFetch";
 import axios from "axios";
 
 const Datatable = ({ columns }) => {
+  const getUserLocal = JSON.parse(localStorage.getItem("user"));
+
   const location = useLocation();
   const path = location.pathname.split("/")[1];
   const [list, setList] = useState([]);
   const { data, loading, error } = useFetch(`/${path}`);
-  const pathList = data.filter((item) => item.isDelete === false);
+  let pathList = data.filter((item) => item.isDelete === false);
+  if (path === "users" && getUserLocal.role !== 0) {
+    pathList = data.filter((item) => item.role === getUserLocal.role);
+  }
+  console.log(pathList);
+  // const roleList = data.filter((item) => item.role === 3);
   useEffect(() => {
     setList(pathList);
   }, [data]);
@@ -84,6 +91,7 @@ const Datatable = ({ columns }) => {
           </div>
         </Link>
       </div>
+
       <DataGrid
         className="datagrid"
         rows={list}

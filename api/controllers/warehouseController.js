@@ -3,6 +3,7 @@ import {
   CheckExistingUser,
   CheckExistingImport,
 } from "../triggers/WarehouseTrigger.js";
+
 export const createWarehouse = async (req, res, next) => {
   const newWarehouse = new Warehouse(req.body);
 
